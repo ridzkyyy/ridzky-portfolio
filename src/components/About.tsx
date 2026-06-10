@@ -3,15 +3,15 @@ export function About() {
     <section className="section" id="about" aria-labelledby="about-heading">
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="num">04</span>
+          <span className="num">04 / SYS.PROFILE</span>
           <h2 id="about-heading">
-            About <em>me</em>
+            About <span>me</span>
           </h2>
         </div>
         <div className="about-grid">
           <p className="big reveal">
             I'm a technical project manager with an engineer's hands. I sit between
-            <em> field operations and engineering</em> — translating dispatcher pain into
+            <mark> field operations and engineering</mark> — translating dispatcher pain into
             architecture, and architecture into systems that survive contact with real trucks,
             real drivers, and real deadlines.
           </p>

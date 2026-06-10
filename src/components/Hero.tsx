@@ -1,30 +1,39 @@
+import { HeroMap } from './HeroMap';
+
 export function Hero() {
   return (
     <header className="hero">
       <div className="wrap hero-top">
-        <span className="brand">RGN — 2026</span>
+        <span className="brand">RGN://OPS</span>
         <nav aria-label="Main navigation">
-          <a href="#work">Work</a>
+          <a href="#systems">Systems</a>
           <a href="#open-source">Open Source</a>
           <a href="#products">Products</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
-      <div className="wrap">
-        <p className="eyebrow reveal">Jakarta, Indonesia · Technical Project Manager @ Lacak.io</p>
-        <h1 className="reveal">
-          Ridzky Guntur
-          <em>Nuriawan</em>
+      <HeroMap />
+      <div className="wrap hero-body">
+        <div className="status-chips reveal">
+          <span className="chip">
+            <span className="dot" aria-hidden="true" /> Tracking · Live
+          </span>
+          <span className="chip">Jakarta · UTC+7</span>
+          <span className="chip">Open to remote</span>
+        </div>
+        <h1>
+          <span className="stroke">Ridzky Guntur</span>
+          <span className="fill">Nuriawan</span>
         </h1>
         <p className="lede reveal">
-          I ship operational systems that move <strong>real fleets</strong> — GPS tracking,
-          IoT telemetry, AI monitoring, and the integrations that keep national-scale
-          logistics honest. <strong>Engineering for operations, not just code.</strong>
+          Technical Project Manager at <strong>Lacak.io</strong>. I ship the backend systems
+          behind <strong>real fleets</strong> — GPS telemetry pipelines, AI safety monitoring,
+          and the integrations that keep national-scale logistics honest.
         </p>
         <div className="hero-cta reveal">
-          <a className="btn primary" href="#work">
-            Selected work ↓
+          <a className="btn primary" href="#systems">
+            ./view-systems ↓
           </a>
           <a className="btn" href="https://github.com/ridzkyyy" target="_blank" rel="noreferrer">
             GitHub
@@ -41,7 +50,7 @@ export function Hero() {
       </div>
       <div className="wrap hero-foot">
         <span>GPS · IoT · Real-time</span>
-        <span>Open to remote</span>
+        <span>Engineering for operations</span>
       </div>
     </header>
   );

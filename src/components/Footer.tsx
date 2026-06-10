@@ -2,8 +2,8 @@ export function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="wrap">
-        <p className="serif-cta reveal">
-          Building something that moves <em>in the real world?</em>
+        <p className="cta-title reveal">
+          Building something that moves <span>in the real world?</span>
         </p>
         <a className="mail reveal" href="mailto:ridzkyguntur12@gmail.com">
           ridzkyguntur12@gmail.com

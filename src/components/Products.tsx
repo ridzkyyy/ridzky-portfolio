@@ -3,9 +3,9 @@ export function Products() {
     <section className="section" id="products" aria-labelledby="products-heading">
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="num">03</span>
+          <span className="num">03 / SHIPPED.SOLO</span>
           <h2 id="products-heading">
-            Independent <em>products</em>
+            Independent <span>products</span>
           </h2>
         </div>
         <div className="shelf">

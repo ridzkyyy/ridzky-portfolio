@@ -28,10 +28,14 @@ export function OpenSource() {
     <section className="section" id="open-source" aria-labelledby="oss-heading">
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="num">02</span>
+          <span className="num">02 / PUBLIC.REPOS</span>
           <h2 id="oss-heading">
-            Open <em>source</em>
+            Open <span>source</span>
           </h2>
+          <p className="sub">
+            Live, MIT-licensed, CI-green — and they talk to each other: MCP Lab is the client,
+            fleet-mcp is the server it connects to.
+          </p>
         </div>
         <div className="shelf">
           {PROJECTS.map((p) => (

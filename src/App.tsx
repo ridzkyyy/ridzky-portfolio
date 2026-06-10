@@ -1,6 +1,6 @@
 import { Hero } from './components/Hero';
 import { Metrics } from './components/Metrics';
-import { CaseStudies } from './components/CaseStudies';
+import { SystemsAtlas } from './components/SystemsAtlas';
 import { OpenSource } from './components/OpenSource';
 import { Products } from './components/Products';
 import { About } from './components/About';
@@ -14,7 +14,7 @@ export default function App() {
       <Hero />
       <main>
         <Metrics />
-        <CaseStudies />
+        <SystemsAtlas />
         <OpenSource />
         <Products />
         <About />

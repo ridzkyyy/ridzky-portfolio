@@ -1,32 +1,34 @@
 :root {
-  /* Dark luxury palette — warm black, ivory, champagne gold */
-  --bg: oklch(16% 0.008 75);
-  --bg-deep: oklch(13% 0.007 75);
-  --surface: oklch(19.5% 0.01 80);
-  --surface-2: oklch(23% 0.012 82);
-  --text: oklch(93% 0.012 85);
-  --muted: oklch(66% 0.018 80);
-  --faint: oklch(48% 0.015 80);
-  --accent: oklch(82% 0.095 88);
-  --accent-deep: oklch(70% 0.105 80);
-  --hairline: oklch(82% 0.095 88 / 0.16);
-  --hairline-soft: oklch(82% 0.095 88 / 0.08);
+  /* Mission control — deep space navy, telemetry cyan, signal amber */
+  --bg: #05080f;
+  --bg-2: #070c16;
+  --panel: #0a111d;
+  --panel-2: #0d1524;
+  --line: rgba(45, 212, 191, 0.16);
+  --line-soft: rgba(45, 212, 191, 0.07);
+  --grid: rgba(125, 211, 252, 0.04);
+  --text: #d9e6f2;
+  --muted: #8294ab;
+  --faint: #54637a;
+  --accent: #2dd4bf;
+  --accent-glow: rgba(45, 212, 191, 0.35);
+  --amber: #fbbf24;
 
-  --serif: 'Instrument Serif', Georgia, serif;
-  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --display: 'Archivo', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --text-hero: clamp(3.2rem, 1.4rem + 7.5vw, 8.5rem);
-  --text-display: clamp(2.2rem, 1.2rem + 3.6vw, 4.4rem);
-  --text-title: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
-  --text-small: 0.84rem;
-  --text-micro: 0.72rem;
+  --text-base: clamp(0.98rem, 0.93rem + 0.25vw, 1.08rem);
+  --text-hero: clamp(2.7rem, 1.2rem + 6.2vw, 6.8rem);
+  --text-display: clamp(1.9rem, 1.1rem + 3vw, 3.6rem);
+  --text-title: clamp(1.35rem, 1.1rem + 0.9vw, 1.85rem);
+  --text-small: 0.85rem;
+  --text-micro: 0.7rem;
 
-  --space-section: clamp(5rem, 4rem + 6vw, 11rem);
+  --space-section: clamp(4.5rem, 3.5rem + 5.5vw, 9.5rem);
   --gutter: clamp(1.25rem, 4vw, 4rem);
-  --measure: 62ch;
+  --radius: 12px;
 
   --duration-fast: 160ms;
-  --duration-slow: 700ms;
+  --duration-slow: 650ms;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
