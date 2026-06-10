@@ -1,0 +1,32 @@
+:root {
+  /* Dark luxury palette — warm black, ivory, champagne gold */
+  --bg: oklch(16% 0.008 75);
+  --bg-deep: oklch(13% 0.007 75);
+  --surface: oklch(19.5% 0.01 80);
+  --surface-2: oklch(23% 0.012 82);
+  --text: oklch(93% 0.012 85);
+  --muted: oklch(66% 0.018 80);
+  --faint: oklch(48% 0.015 80);
+  --accent: oklch(82% 0.095 88);
+  --accent-deep: oklch(70% 0.105 80);
+  --hairline: oklch(82% 0.095 88 / 0.16);
+  --hairline-soft: oklch(82% 0.095 88 / 0.08);
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-hero: clamp(3.2rem, 1.4rem + 7.5vw, 8.5rem);
+  --text-display: clamp(2.2rem, 1.2rem + 3.6vw, 4.4rem);
+  --text-title: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
+  --text-small: 0.84rem;
+  --text-micro: 0.72rem;
+
+  --space-section: clamp(5rem, 4rem + 6vw, 11rem);
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --measure: 62ch;
+
+  --duration-fast: 160ms;
+  --duration-slow: 700ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
