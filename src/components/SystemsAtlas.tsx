@@ -167,10 +167,10 @@ export function SystemsAtlas() {
   return (
     <section className="section" id="systems" aria-labelledby="systems-heading">
       <div className="wrap">
-        <div className="section-head reveal">
+        <div className="section-head">
           <span className="num">01 / SYS.ATLAS</span>
           <h2 id="systems-heading">
-            Backend <span>systems</span>
+            Backend <span className="hl">systems</span>
           </h2>
           <p className="sub">
             Production systems I lead and build at Lacak.io — drawn from the real architectures,
@@ -179,7 +179,7 @@ export function SystemsAtlas() {
         </div>
 
         {FEATURED.map((s) => (
-          <article className="featured-system reveal" key={s.id}>
+          <article className="featured-system" key={s.id}>
             <div className="sys-head">
               <h3>{s.title}</h3>
               <span className="sys-id mono">{s.id}</span>
@@ -196,7 +196,7 @@ export function SystemsAtlas() {
 
         <div className="atlas-grid">
           {MINIS.map((m) => (
-            <article className="mini-system reveal" key={m.id}>
+            <article className="mini-system" key={m.id}>
               <span className="sys-id mono">{m.id}</span>
               <h4>{m.name}</h4>
               <p className="purpose">{m.purpose}</p>

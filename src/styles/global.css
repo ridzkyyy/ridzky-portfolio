@@ -8,8 +8,17 @@
 }
 
 html {
-  scroll-behavior: smooth;
   color-scheme: dark;
+  overflow-x: clip;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
@@ -38,6 +47,17 @@ body::before {
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 30%, transparent 80%);
+}
+
+/* Film grain — keeps the dark surfaces from feeling flat */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 95;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 #root {
@@ -94,7 +114,7 @@ img {
   margin-top: 0.4rem;
 }
 
-.section-head h2 span {
+.section-head h2 .hl {
   color: var(--accent);
 }
 
@@ -113,18 +133,111 @@ img {
   color: var(--muted);
 }
 
-/* Reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition:
-    opacity var(--duration-slow) var(--ease-out-expo),
-    transform var(--duration-slow) var(--ease-out-expo);
+/* ---------- Motion primitives ---------- */
+/* Word-split masks (built at runtime by motion/split.ts) */
+.w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
 }
 
-.reveal.is-visible {
+.wi {
+  display: inline-block;
+}
+
+/* Headline line masks */
+.line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+/* Scroll progress hairline */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 90;
+  background: linear-gradient(90deg, var(--accent), rgba(251, 191, 36, 0.8));
+  transform-origin: left;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* Boot preloader */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  clip-path: inset(0 0 0 0);
+}
+
+.pre-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: min(280px, 70vw);
+}
+
+.pre-label {
+  font-size: var(--text-micro);
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.pre-count {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pre-bar {
+  width: 100%;
+  height: 1px;
+  background: var(--line-soft);
+  overflow: hidden;
+}
+
+.pre-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Cursor spotlight (class added at runtime on fine-pointer devices) */
+.spot {
+  position: relative;
+}
+
+.spot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    240px circle at var(--mx, -300px) var(--my, -300px),
+    rgba(45, 212, 191, 0.09),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.spot:hover::after {
   opacity: 1;
-  transform: none;
 }
 
 /* ---------- Hero ---------- */
@@ -176,9 +289,36 @@ img {
   color: var(--muted);
 }
 
-.hero-top nav a:hover,
-.hero-top nav a:focus-visible {
+/* Rolling label: the visible span slides up, an accent copy rolls in from below */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.nav-link > span {
+  display: block;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.nav-link::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
   color: var(--accent);
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.nav-link:hover > span,
+.nav-link:focus-visible > span {
+  transform: translateY(-100%);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: translateY(-100%);
 }
 
 .hero-body {
@@ -230,14 +370,16 @@ img {
   text-transform: uppercase;
 }
 
-.hero h1 .stroke {
+.hero h1 .line {
   display: block;
+}
+
+.hero h1 .stroke {
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(217, 230, 242, 0.55);
 }
 
 .hero h1 .fill {
-  display: block;
   color: var(--accent);
 }
 
@@ -417,6 +559,8 @@ img {
   fill: var(--bg);
   stroke: var(--accent);
   stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .pipe-node.terminal {
@@ -576,8 +720,8 @@ img {
     box-shadow var(--duration-fast) ease;
 }
 
+/* transform is owned by the JS tilt interaction; hover only paints */
 .card:hover {
-  transform: translateY(-4px);
   border-color: var(--line);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
 }
@@ -706,7 +850,7 @@ img {
   line-height: 1.04;
 }
 
-.footer .cta-title span {
+.footer .cta-title .hl {
   color: var(--accent);
 }
 
@@ -756,16 +900,7 @@ img {
 }
 
 /* ---------- Hero map SVG animations ---------- */
-.route-draw {
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  animation: drawroute 3.2s var(--ease-out-expo) 0.3s forwards;
-}
-
-@keyframes drawroute {
-  to { stroke-dashoffset: 0; }
-}
-
+/* route drawing is GSAP-driven (motion/intro.ts); CSS keeps it visible without JS */
 .ping {
   transform-origin: center;
   transform-box: fill-box;
@@ -796,28 +931,30 @@ img {
   .pipe-labels span {
     display: none;
   }
+
+  /* Wide diagram scrolls inside its own container instead of the page */
+  .pipeline {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .pipeline svg,
+  .pipe-labels {
+    min-width: 560px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .preloader,
+  .progress {
+    display: none;
   }
 
   .pipe-dash,
-  .route-draw,
   .ping,
   .chip .dot {
     animation: none;
-  }
-
-  .route-draw {
-    stroke-dashoffset: 0;
   }
 
   .pipe-pulse,
@@ -827,7 +964,10 @@ img {
 
   .btn,
   .card,
-  .mini-system {
+  .mini-system,
+  .nav-link > span,
+  .nav-link::after,
+  .spot::after {
     transition: none;
   }
 }

@@ -9,7 +9,7 @@ const METRICS = [
 export function Metrics() {
   return (
     <section aria-label="Impact metrics" className="wrap">
-      <div className="metrics reveal">
+      <div className="metrics">
         {METRICS.map((m) => (
           <div className="metric" key={m.value}>
             <b>{m.value}</b>

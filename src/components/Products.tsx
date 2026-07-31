@@ -2,14 +2,14 @@ export function Products() {
   return (
     <section className="section" id="products" aria-labelledby="products-heading">
       <div className="wrap">
-        <div className="section-head reveal">
+        <div className="section-head">
           <span className="num">03 / SHIPPED.SOLO</span>
           <h2 id="products-heading">
-            Independent <span>products</span>
+            Independent <span className="hl">products</span>
           </h2>
         </div>
         <div className="shelf">
-          <article className="card reveal">
+          <article className="card">
             <div className="shot">
               <img
                 src="/media/rekapmbg-hero.jpg"
@@ -34,7 +34,7 @@ export function Products() {
               </div>
             </div>
           </article>
-          <article className="card reveal">
+          <article className="card">
             <div className="shot">
               <img
                 src="/media/rekapmbg-features.jpg"

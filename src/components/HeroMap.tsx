@@ -29,19 +29,22 @@ export function HeroMap() {
       </defs>
       <g mask="url(#edge)">
         {/* dotted grid */}
-        {Array.from({ length: 11 }, (_, r) =>
-          Array.from({ length: 12 }, (_, c) => (
-            <circle
-              key={`${r}-${c}`}
-              cx={30 + c * 55}
-              cy={30 + r * 55}
-              r="1.4"
-              fill="rgba(130,148,171,0.28)"
-            />
-          )),
-        )}
+        <g className="map-grid">
+          {Array.from({ length: 11 }, (_, r) =>
+            Array.from({ length: 12 }, (_, c) => (
+              <circle
+                key={`${r}-${c}`}
+                cx={30 + c * 55}
+                cy={30 + r * 55}
+                r="1.4"
+                fill="rgba(130,148,171,0.28)"
+              />
+            )),
+          )}
+        </g>
         {/* geofence */}
         <circle
+          className="geo"
           cx="360"
           cy="250"
           r="58"
@@ -53,7 +56,7 @@ export function HeroMap() {
         <path d={ROUTE} className="route-draw" stroke="rgba(45,212,191,0.8)" strokeWidth="2" />
         {/* waypoint pings */}
         {WAYPOINTS.map((w) => (
-          <g key={`${w.x}-${w.y}`}>
+          <g className="wp" key={`${w.x}-${w.y}`}>
             <circle className="ping" cx={w.x} cy={w.y} r="9" stroke="rgba(45,212,191,0.5)" strokeWidth="1.2" />
             <circle cx={w.x} cy={w.y} r="3.5" fill="#2dd4bf" />
           </g>

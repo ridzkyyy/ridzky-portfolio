@@ -27,10 +27,10 @@ export function OpenSource() {
   return (
     <section className="section" id="open-source" aria-labelledby="oss-heading">
       <div className="wrap">
-        <div className="section-head reveal">
+        <div className="section-head">
           <span className="num">02 / PUBLIC.REPOS</span>
           <h2 id="oss-heading">
-            Open <span>source</span>
+            Open <span className="hl">source</span>
           </h2>
           <p className="sub">
             Live, MIT-licensed, CI-green — and they talk to each other: MCP Lab is the client,
@@ -39,7 +39,7 @@ export function OpenSource() {
         </div>
         <div className="shelf">
           {PROJECTS.map((p) => (
-            <article className="card reveal" key={p.name}>
+            <article className="card" key={p.name}>
               <div className="shot">
                 <img src={p.media} alt={p.alt} loading="lazy" width={960} height={600} />
               </div>

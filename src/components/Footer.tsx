@@ -2,10 +2,10 @@ export function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="wrap">
-        <p className="cta-title reveal">
-          Building something that moves <span>in the real world?</span>
+        <p className="cta-title">
+          Building something that moves <span className="hl">in the real world?</span>
         </p>
-        <a className="mail reveal" href="mailto:ridzkyguntur12@gmail.com">
+        <a className="mail" href="mailto:ridzkyguntur12@gmail.com" data-magnetic>
           ridzkyguntur12@gmail.com
         </a>
         <div className="footer-meta">

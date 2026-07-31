@@ -2,20 +2,20 @@ export function About() {
   return (
     <section className="section" id="about" aria-labelledby="about-heading">
       <div className="wrap">
-        <div className="section-head reveal">
+        <div className="section-head">
           <span className="num">04 / SYS.PROFILE</span>
           <h2 id="about-heading">
-            About <span>me</span>
+            About <span className="hl">me</span>
           </h2>
         </div>
         <div className="about-grid">
-          <p className="big reveal">
+          <p className="big">
             I'm a technical project manager with an engineer's hands. I sit between
             <mark> field operations and engineering</mark> — translating dispatcher pain into
             architecture, and architecture into systems that survive contact with real trucks,
             real drivers, and real deadlines.
           </p>
-          <ul className="fact-list reveal">
+          <ul className="fact-list">
             <li>
               <span className="k">Role</span>
               <span className="v">Technical Project Manager, Lacak.io (GPS tracking & fleet)</span>
