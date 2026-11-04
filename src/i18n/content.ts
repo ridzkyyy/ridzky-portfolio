@@ -24,8 +24,17 @@ export interface Stage {
   steps: Step[];
 }
 
+export interface Outcome {
+  value: string;
+  unit: string;
+  label: string;
+}
+
 export interface CaseStudy {
   id: string;
+  outcome: Outcome;
+  before?: string;
+  after?: string;
   tag: string;
   title: string;
   summary: string;
@@ -55,20 +64,28 @@ const STACK = {
   fleet: ['Java 17', 'Spring Boot', 'Kafka', 'Python asyncio', 'PostgreSQL', 'Redis', 'ClickHouse'],
   mcpLab: ['TypeScript', 'React', 'MCP SDK', 'Vercel'],
   fleetMcp: ['TypeScript', 'MCP', 'NMEA 0183', 'Vercel'],
+  hub: ['Java 21', 'Spring Boot', 'Netty', 'PostgreSQL', 'MQTT', 'React', 'Docker'],
+  video: ['Java 21', 'Spring Boot', 'Netty', 'JT/T 808 and 1078', 'MQTT', 'React'],
 };
 
 const en = {
-  nav: { work: 'Work', projects: 'Projects', about: 'About', contact: 'Contact', switchTo: 'Baca dalam Bahasa Indonesia', switchShort: 'ID' },
+  nav: { work: 'Work', projects: 'Projects', about: 'About', contact: 'Contact', switchTo: 'Baca dalam Bahasa Indonesia', switchShort: 'ID', tagline: 'Fleet, IoT and AI systems', status: 'Open to remote work', cta: 'Email me' },
   hero: {
     name: 'Ridzky Guntur Nuriawan',
     role: 'Technical Project Manager and backend engineer for fleet, IoT and AI systems.',
     intro: 'I lead and build the software behind GPS tracking, telemetry pipelines and driver-safety AI, and I ship my own products on the side. Based in Jakarta, open to remote work.',
     primary: 'Email me',
     secondary: 'See my work',
-    readout: { label: 'Where I am', base: 'Base, Jakarta', time: 'Local time', count: 'Projects on this page' },
+    statement: 'I replace rented fleet software with platforms the company owns.',
+    outcomesTitle: 'What changed',
+    estimate: 'Estimates from licence prices and fleet size.',
   },
   work: {
     title: 'Selected work',
+    lede: 'Three platforms we stopped renting, and one product I built and sold myself.',
+    before: 'Before',
+    after: 'After',
+    did: 'What I did',
     private: 'Private system. I can walk you through it on a call.',
     blurred: 'Blurred for privacy',
     stageHint: 'Parts of the system',
@@ -76,24 +93,10 @@ const en = {
     benchReadout: 'Simulated fix, one every 2.4 s',
     items: [
       {
-        id: 'rekap',
-        tag: 'Own product, in production',
-        title: 'rekapmbg.id',
-        summary: "An operations ERP for Indonesia's free school-meal program (MBG).",
-        points: [
-          'Designed, built and sold it alone, from the data model to the sales demo.',
-          'Covers procurement, kitchen production, distribution, finance and government reporting in one place.',
-          'Finance reconciles to the rupiah, shipped through 84+ pull requests with end-to-end tests.',
-        ],
-        stack: STACK.rekap,
-        links: [{ label: 'Visit rekapmbg.id', href: 'https://rekapmbg.id' }],
-        shots: [
-          { src: '/media/rekapmbg-hero.jpg', alt: 'rekapmbg.id landing page with a dashboard preview' },
-          { src: '/media/rekapmbg-features.jpg', alt: 'rekapmbg.id overview of its operations modules' },
-        ],
-      },
-      {
         id: 'fleet',
+        outcome: { value: '~$19k', unit: 'a month', label: 'in device licences no longer rented, across 19,000 devices' },
+        before: 'Every tracker ran on a rented platform, at about $1 per device each month.',
+        after: 'Our own gateway, event pipeline and platform core now carry the whole fleet.',
         tag: 'Work, led and built',
         title: 'Fleet telematics platform',
         summary: 'The backend that turns raw GPS signals from a tracker fleet into alerts a dispatcher can act on.',
@@ -139,51 +142,70 @@ const en = {
         ],
       },
       {
-        id: 'mcp-lab',
-        tag: 'Open source',
-        title: 'MCP Lab',
-        summary: 'Postman for MCP servers: connect, explore and test any Model Context Protocol server from the browser.',
+        id: 'hub',
+        outcome: { value: '~Rp18M', unit: 'a month', label: 'hosted hub subscription replaced, about Rp216M a year' },
+        before: 'Device data passed through a hosted telematics hub billed at about Rp18 million a month.',
+        after: 'One self-hosted hub: any tracker protocol in, one clean data shape out to every system.',
+        tag: 'Work, led and built',
+        title: 'Telematics hub',
+        summary: 'The layer between every GPS tracker and the systems that use its data, now running on our own servers.',
         points: [
-          "Browse a server's tools and run them from forms generated from their JSON schema.",
-          'Readable results instead of raw JSON-RPC, with a built-in demo server to try.',
-          'MIT licensed, live on Vercel, CI on every change.',
+          'Raw packets and the messages decoded from them, per device, side by side.',
+          'Connectors, handlers, rules, zones and webhooks set up from the toolbox, without code.',
+          'Logs, MQTT sessions and webhook delivery history in one place, with quotas per subaccount.',
         ],
-        stack: STACK.mcpLab,
-        links: [
-          { label: 'Open the demo', href: 'https://mcp-lab.vercel.app' },
-          { label: 'Source on GitHub', href: 'https://github.com/ridzkyyy/mcp-lab' },
-        ],
-        shots: [{ src: '/media/mcp-lab.gif', alt: 'MCP Lab connecting to a server and running a tool' }],
+        stack: STACK.hub,
+        links: [],
+        shots: [{ src: '/media/private/telematics-hub.jpg', alt: 'Blurred screenshot of a device page in the telematics hub', blurred: true }],
       },
       {
-        id: 'fleet-mcp',
-        tag: 'Open source',
-        title: 'fleet-mcp',
-        summary: 'Fleet telemetry as typed tools for AI agents, where my day job meets the agent era.',
+        id: 'video',
+        outcome: { value: '~$5', unit: 'per licence', label: 'no longer bought from video vendors, on projects of around 1,000 units' },
+        before: 'Dashcams were split across three vendor platforms, each with its own licence and a decoder we could not inspect.',
+        after: 'One gateway and media server whose decoding we can audit, and one console for every brand.',
+        tag: 'Work, led and built',
+        title: 'Video telematics platform',
+        summary: 'Live video, alarms, evidence and driver safety for dashcams from several vendors, in one place.',
         points: [
-          'GPS positions, trips, geofence events and NMEA parsing exposed as MCP tools.',
-          'A deterministic simulated city fleet, so it works with zero setup.',
-          'Pairs with MCP Lab: one is the client, the other the server it talks to.',
+          'A dashboard of alarms per hour by source: road, driver, vehicle IO and geofence.',
+          'Evidence in one menu: alarm clips, snapshots, historical video, audio, tracks and intercom.',
+          'Prevention tools on top of the video: fatigue limits, pre-start checks and driver risk.',
         ],
-        stack: STACK.fleetMcp,
-        links: [
-          { label: 'Live endpoint', href: 'https://fleet-mcp.vercel.app' },
-          { label: 'Source on GitHub', href: 'https://github.com/ridzkyyy/fleet-mcp' },
+        stack: STACK.video,
+        links: [],
+        shots: [{ src: '/media/private/video-telematics.jpg', alt: 'Blurred screenshot of the video telematics dashboard', blurred: true }],
+      },
+      {
+        id: 'rekap',
+        outcome: { value: '84+', unit: 'pull requests', label: 'shipped alone to production, from the data model to the sales demo' },
+        tag: 'Own product, in production',
+        title: 'rekapmbg.id',
+        summary: "An operations ERP for Indonesia's free school-meal program (MBG).",
+        points: [
+          'Designed, built and sold it alone, from the data model to the sales demo.',
+          'Covers procurement, kitchen production, distribution, finance and government reporting in one place.',
+          'Finance reconciles to the rupiah, shipped through 84+ pull requests with end-to-end tests.',
         ],
-        shots: [{ src: '/media/fleet-mcp.gif', alt: 'MCP Lab connected to the fleet-mcp server and calling a tool' }],
+        stack: STACK.rekap,
+        links: [{ label: 'Visit rekapmbg.id', href: 'https://rekapmbg.id' }],
+        shots: [
+          { src: '/media/rekapmbg-hero.jpg', alt: 'rekapmbg.id landing page with a dashboard preview' },
+          { src: '/media/rekapmbg-features.jpg', alt: 'rekapmbg.id overview of its operations modules' },
+        ],
       },
     ] as CaseStudy[],
   },
   projects: {
-    title: 'Everything else I built',
+    title: 'Also built',
+    more: 'Show all',
     filters: { all: 'All', fleet: 'Fleet and maps', ai: 'AI', platform: 'Platforms and tools', web: 'Web and personal' },
     items: [
-      { group: 'fleet', name: 'Video telematics platform', kind: 'Platform, live video', what: 'One gateway and media server for dashcams from several vendors: live video, alarms and evidence clips in one console.', image: { src: '/media/private/video-telematics.jpg', alt: 'Blurred screenshot of the live video telematics map', blurred: true } },
-      { group: 'platform', name: 'Telematics hub', kind: 'Self-hosted platform', what: 'Any GPS tracker in, one clean data shape out, with analytics and forwarding set up without code.', image: { src: '/media/private/telematics-hub.jpg', alt: 'Blurred screenshot of the telematics hub summary page', blurred: true } },
       { group: 'ai', name: 'Driver fatigue validator', kind: 'AI, computer vision', what: 'Checks dashcam fatigue alarms with face inference, so the ops console only shows the alarms that hold up.', image: { src: '/media/private/fatigue-monitor.jpg', alt: 'Blurred screenshot of the fatigue monitoring console', blurred: true } },
       { group: 'fleet', name: 'Mine control room', kind: 'Dashboard', what: 'A live map of an open-pit haul fleet, built to be read at a glance in a dark room.', image: { src: '/media/private/mine-map.jpg', alt: 'Blurred screenshot of the mine fleet map', blurred: true } },
       { group: 'fleet', name: 'Mine idle map', kind: 'Dashboard, mining', what: 'Idle time and speed by zone, drawn over a drone orthophoto of the pit, for every dashcam unit on site.', image: { src: '/media/private/idle-map.jpg', alt: 'Blurred screenshot of the mine idle map over an orthophoto', blurred: true } },
       { group: 'fleet', name: 'Harvest control tower', kind: 'Prototype, agritech', what: 'Palm-oil harvest blocks, crews and haul trucks on one live map, from field progress to profit per block.', image: { src: '/media/private/harvest-map.jpg', alt: 'Blurred screenshot of the plantation harvest map', blurred: true } },
+      { group: 'ai', name: 'MCP Lab', kind: 'Open source', what: 'Postman for MCP servers: connect, browse tools and run them from forms generated from their schema.', image: { src: '/media/mcp-lab.gif', alt: 'MCP Lab connecting to a server and running a tool' } },
+      { group: 'ai', name: 'fleet-mcp', kind: 'Open source', what: 'Fleet telemetry as typed tools for AI agents, with a simulated city fleet that works with zero setup.', image: { src: '/media/fleet-mcp.gif', alt: 'MCP Lab calling a tool on the fleet-mcp server' } },
       { group: 'web', name: 'Office records app', kind: 'Web app, public sector', what: 'Incoming and outgoing letters, archive search and an asset register for a government office.', image: { src: '/media/private/office-archive.jpg', alt: 'Blurred screenshot of the office records upload form', blurred: true } },
       { group: 'web', name: 'Invitation and photobooth', kind: 'Personal', what: 'My wedding invitation with RSVP per guest, plus a photobooth that prints strips instead of souvenirs.', image: { src: '/media/private/wedding.jpg', alt: 'Blurred screenshot of the wedding invitation', blurred: true } },
       { group: 'ai', name: 'Mine safety AI console', kind: 'AI, dashboard', what: 'Alarm validation, evidence clips, live streams and intercom for the dashcams on a mining site.' },
@@ -235,18 +257,26 @@ const en = {
 
 export type Content = typeof en;
 
+const byId = (key: string): CaseStudy => en.work.items.find((item) => item.id === key) as CaseStudy;
+
 const id: Content = {
-  nav: { work: 'Karya', projects: 'Proyek', about: 'Tentang', contact: 'Kontak', switchTo: 'Read in English', switchShort: 'EN' },
+  nav: { work: 'Karya', projects: 'Proyek', about: 'Tentang', contact: 'Kontak', switchTo: 'Read in English', switchShort: 'EN', tagline: 'Sistem armada, IoT dan AI', status: 'Terbuka untuk remote', cta: 'Kirim email' },
   hero: {
     name: 'Ridzky Guntur Nuriawan',
     role: 'Technical Project Manager dan backend engineer untuk sistem armada, IoT dan AI.',
     intro: 'Saya memimpin dan membangun software di balik pemantauan GPS, pipeline telemetri dan AI keselamatan pengemudi, dan merilis produk saya sendiri di luar jam kerja. Berbasis di Jakarta, terbuka untuk kerja remote.',
     primary: 'Kirim email',
     secondary: 'Lihat karya saya',
-    readout: { label: 'Posisi saya', base: 'Basis, Jakarta', time: 'Waktu lokal', count: 'Proyek di halaman ini' },
+    statement: 'Saya mengganti software armada sewaan dengan platform milik perusahaan sendiri.',
+    outcomesTitle: 'Yang berubah',
+    estimate: 'Estimasi dari harga lisensi dan jumlah armada.',
   },
   work: {
     title: 'Karya pilihan',
+    lede: 'Tiga platform yang tidak lagi kami sewa, dan satu produk yang saya bangun dan jual sendiri.',
+    before: 'Sebelum',
+    after: 'Sesudah',
+    did: 'Yang saya kerjakan',
     private: 'Sistem privat. Saya bisa menjelaskannya lewat panggilan.',
     blurred: 'Diburamkan demi privasi',
     stageHint: 'Bagian sistem',
@@ -254,22 +284,10 @@ const id: Content = {
     benchReadout: 'Simulasi titik, satu tiap 2,4 dtk',
     items: [
       {
-        ...en.work.items[0],
-        tag: 'Produk sendiri, sudah produksi',
-        summary: 'ERP operasional untuk program Makan Bergizi Gratis (MBG).',
-        points: [
-          'Dirancang, dibangun dan dijual sendiri, dari model data sampai demo penjualan.',
-          'Mencakup pengadaan, produksi dapur, distribusi, keuangan dan pelaporan ke pemerintah dalam satu tempat.',
-          'Keuangan cocok sampai rupiah terakhir, dirilis lewat 84+ pull request dengan tes end-to-end.',
-        ],
-        links: [{ label: 'Kunjungi rekapmbg.id', href: 'https://rekapmbg.id' }],
-        shots: [
-          { src: '/media/rekapmbg-hero.jpg', alt: 'Halaman depan rekapmbg.id dengan pratinjau dashboard' },
-          { src: '/media/rekapmbg-features.jpg', alt: 'Ringkasan modul operasional rekapmbg.id' },
-        ],
-      },
-      {
-        ...en.work.items[1],
+        ...byId('fleet'),
+        outcome: { value: '~$19rb', unit: 'per bulan', label: 'biaya lisensi perangkat yang tidak lagi disewa, untuk 19.000 perangkat' },
+        before: 'Setiap tracker berjalan di platform sewaan, sekitar $1 per perangkat tiap bulan.',
+        after: 'Gateway, pipeline event dan inti platform milik sendiri kini menjalankan seluruh armada.',
         tag: 'Pekerjaan, saya pimpin dan bangun',
         shots: [
           { src: '/media/private/fleet-map.jpg', alt: 'Tangkapan layar buram peta monitoring langsung dengan panel pemutaran trip', blurred: true },
@@ -313,45 +331,63 @@ const id: Content = {
         ],
       },
       {
-        ...en.work.items[2],
-        summary: 'Postman untuk server MCP: sambungkan, jelajahi dan uji server Model Context Protocol apa pun dari browser.',
+        ...byId('hub'),
+        outcome: { value: '~Rp18 jt', unit: 'per bulan', label: 'langganan hub hosted yang digantikan, sekitar Rp216 jt setahun' },
+        before: 'Data perangkat lewat hub telematika hosted dengan tagihan sekitar Rp18 juta per bulan.',
+        after: 'Satu hub self-hosted: protokol tracker apa pun masuk, satu bentuk data rapi keluar ke semua sistem.',
+        tag: 'Pekerjaan, saya pimpin dan bangun',
+        summary: 'Lapisan antara setiap tracker GPS dan sistem yang memakai datanya, kini berjalan di server sendiri.',
         points: [
-          'Jelajahi tool sebuah server dan jalankan lewat form yang dibuat dari JSON schema-nya.',
-          'Hasil yang mudah dibaca, bukan JSON-RPC mentah, plus server demo bawaan untuk dicoba.',
-          'Lisensi MIT, live di Vercel, CI di setiap perubahan.',
+          'Paket mentah dan pesan hasil dekodenya, per perangkat, berdampingan.',
+          'Connector, handler, rule, zone dan webhook diatur dari toolbox, tanpa kode.',
+          'Log, sesi MQTT dan riwayat kiriman webhook di satu tempat, dengan kuota per subaccount.',
         ],
-        links: [
-          { label: 'Buka demo', href: 'https://mcp-lab.vercel.app' },
-          { label: 'Kode di GitHub', href: 'https://github.com/ridzkyyy/mcp-lab' },
-        ],
-        shots: [{ src: '/media/mcp-lab.gif', alt: 'MCP Lab tersambung ke server dan menjalankan tool' }],
+        shots: [{ src: '/media/private/telematics-hub.jpg', alt: 'Tangkapan layar buram halaman perangkat di telematics hub', blurred: true }],
       },
       {
-        ...en.work.items[3],
-        summary: 'Telemetri armada sebagai tool bertipe untuk agen AI, titik temu pekerjaan harian saya dengan era agen.',
+        ...byId('video'),
+        outcome: { value: '~$5', unit: 'per lisensi', label: 'tidak lagi dibeli dari vendor video, di proyek sekitar 1.000 unit' },
+        before: 'Dashcam terpecah di tiga platform vendor, masing-masing dengan lisensi sendiri dan decoder yang tidak bisa kami periksa.',
+        after: 'Satu gateway dan media server yang dekodenya bisa kami audit, dan satu konsol untuk semua merek.',
+        tag: 'Pekerjaan, saya pimpin dan bangun',
+        title: 'Platform video telematika',
+        summary: 'Video langsung, alarm, bukti dan keselamatan pengemudi untuk dashcam dari beberapa vendor, di satu tempat.',
         points: [
-          'Posisi GPS, trip, event geofence dan parsing NMEA tersedia sebagai tool MCP.',
-          'Armada kota simulasi yang deterministik, jadi langsung jalan tanpa setup.',
-          'Berpasangan dengan MCP Lab: satu client, satunya server yang diajak bicara.',
+          'Dashboard alarm per jam menurut sumber: jalan, pengemudi, IO kendaraan dan geofence.',
+          'Bukti dalam satu menu: klip alarm, snapshot, video historis, audio, track dan interkom.',
+          'Alat pencegahan di atas video: batas kelelahan, cek sebelum berangkat dan risiko pengemudi.',
         ],
-        links: [
-          { label: 'Endpoint live', href: 'https://fleet-mcp.vercel.app' },
-          { label: 'Kode di GitHub', href: 'https://github.com/ridzkyyy/fleet-mcp' },
+        shots: [{ src: '/media/private/video-telematics.jpg', alt: 'Tangkapan layar buram dashboard video telematika', blurred: true }],
+      },
+      {
+        ...byId('rekap'),
+        outcome: { value: '84+', unit: 'pull request', label: 'dirilis sendiri sampai produksi, dari model data sampai demo penjualan' },
+        tag: 'Produk sendiri, sudah produksi',
+        summary: 'ERP operasional untuk program Makan Bergizi Gratis (MBG).',
+        points: [
+          'Dirancang, dibangun dan dijual sendiri, dari model data sampai demo penjualan.',
+          'Mencakup pengadaan, produksi dapur, distribusi, keuangan dan pelaporan ke pemerintah dalam satu tempat.',
+          'Keuangan cocok sampai rupiah terakhir, dirilis lewat 84+ pull request dengan tes end-to-end.',
         ],
-        shots: [{ src: '/media/fleet-mcp.gif', alt: 'MCP Lab tersambung ke server fleet-mcp dan memanggil tool' }],
+        links: [{ label: 'Kunjungi rekapmbg.id', href: 'https://rekapmbg.id' }],
+        shots: [
+          { src: '/media/rekapmbg-hero.jpg', alt: 'Halaman depan rekapmbg.id dengan pratinjau dashboard' },
+          { src: '/media/rekapmbg-features.jpg', alt: 'Ringkasan modul operasional rekapmbg.id' },
+        ],
       },
     ],
   },
   projects: {
-    title: 'Semua proyek lainnya',
+    title: 'Juga saya bangun',
+    more: 'Tampilkan semua',
     filters: { all: 'Semua', fleet: 'Armada dan peta', ai: 'AI', platform: 'Platform dan tool', web: 'Web dan pribadi' },
     items: [
-      { group: 'fleet', name: 'Platform video telematika', kind: 'Platform, video langsung', what: 'Satu gateway dan media server untuk dashcam dari beberapa vendor: video langsung, alarm dan klip bukti dalam satu konsol.', image: { src: '/media/private/video-telematics.jpg', alt: 'Tangkapan layar buram peta video telematika', blurred: true } },
-      { group: 'platform', name: 'Telematics hub', kind: 'Platform self-hosted', what: 'Tracker GPS apa pun masuk, satu bentuk data rapi keluar, dengan analitik dan penerusan tanpa kode.', image: { src: '/media/private/telematics-hub.jpg', alt: 'Tangkapan layar buram halaman ringkasan telematics hub', blurred: true } },
       { group: 'ai', name: 'Validator kelelahan sopir', kind: 'AI, computer vision', what: 'Memeriksa alarm kelelahan dari dashcam dengan inferensi wajah, jadi konsol ops hanya menampilkan alarm yang terbukti.', image: { src: '/media/private/fatigue-monitor.jpg', alt: 'Tangkapan layar buram konsol monitoring kelelahan', blurred: true } },
       { group: 'fleet', name: 'Control room tambang', kind: 'Dashboard', what: 'Peta langsung armada haul truck tambang terbuka, dibuat agar terbaca sekilas di ruangan gelap.', image: { src: '/media/private/mine-map.jpg', alt: 'Tangkapan layar buram peta armada tambang', blurred: true } },
       { group: 'fleet', name: 'Peta idle tambang', kind: 'Dashboard, tambang', what: 'Waktu idle dan kecepatan per zona, digambar di atas ortofoto drone area tambang, untuk setiap unit dashcam di site.', image: { src: '/media/private/idle-map.jpg', alt: 'Tangkapan layar buram peta idle tambang di atas ortofoto', blurred: true } },
       { group: 'fleet', name: 'Menara kendali panen', kind: 'Prototipe, agritech', what: 'Blok panen sawit, kemandoran dan truk angkut di satu peta langsung, dari progres lapangan sampai profit per blok.', image: { src: '/media/private/harvest-map.jpg', alt: 'Tangkapan layar buram peta panen perkebunan', blurred: true } },
+      { group: 'ai', name: 'MCP Lab', kind: 'Open source', what: 'Postman untuk server MCP: sambungkan, jelajahi tool dan jalankan lewat form yang dibuat dari schema-nya.', image: { src: '/media/mcp-lab.gif', alt: 'MCP Lab tersambung ke server dan menjalankan tool' } },
+      { group: 'ai', name: 'fleet-mcp', kind: 'Open source', what: 'Telemetri armada sebagai tool bertipe untuk agen AI, dengan armada kota simulasi yang langsung jalan tanpa setup.', image: { src: '/media/fleet-mcp.gif', alt: 'MCP Lab memanggil tool di server fleet-mcp' } },
       { group: 'web', name: 'Aplikasi arsip kantor', kind: 'Web app, sektor publik', what: 'Surat masuk dan keluar, pencarian arsip dan daftar inventaris untuk sebuah kantor pemerintah.', image: { src: '/media/private/office-archive.jpg', alt: 'Tangkapan layar buram form unggah surat', blurred: true } },
       { group: 'web', name: 'Undangan dan photobooth', kind: 'Pribadi', what: 'Undangan pernikahan saya dengan RSVP per tamu, plus photobooth yang mencetak strip foto pengganti souvenir.', image: { src: '/media/private/wedding.jpg', alt: 'Tangkapan layar buram undangan pernikahan', blurred: true } },
       { group: 'ai', name: 'Konsol AI keselamatan tambang', kind: 'AI, dashboard', what: 'Validasi alarm, klip bukti, live stream dan interkom untuk dashcam di sebuah site tambang.' },
