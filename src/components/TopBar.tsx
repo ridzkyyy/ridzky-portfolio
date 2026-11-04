@@ -26,33 +26,15 @@ function useActiveSection() {
   return active;
 }
 
-function Mark() {
-  return (
-    <svg className="mark" viewBox="0 0 32 32" aria-hidden="true">
-      <rect width="32" height="32" rx="9" />
-      <path d="M8 22c3-8 6 0 9-6s5-6 7-6" />
-      <circle cx="24" cy="10" r="2.6" />
-    </svg>
-  );
-}
-
 export function TopBar() {
-  const { t, toggle } = useLang();
+  const { t, lang, toggle } = useLang();
   const active = useActiveSection();
   return (
     <div className="bar-shell">
       <div className="bar wrap">
         <a className="brand" href="#top">
-          <Mark />
-          <span className="brand-text">
-            <b>Ridzky Guntur</b>
-            <small>{t.nav.tagline}</small>
-          </span>
+          Ridzky Guntur Nuriawan
         </a>
-        <span className="status">
-          <i aria-hidden="true" />
-          {t.nav.status} · <JakartaClock /> WIB
-        </span>
         <nav aria-label="Main">
           {SECTIONS.map((id) => (
             <a key={id} href={`#${id}`} aria-current={active === id ? 'true' : undefined}>
@@ -60,11 +42,14 @@ export function TopBar() {
             </a>
           ))}
         </nav>
-        <div className="bar-actions">
+        <div className="bar-end">
+          <span className="bar-time">
+            Jakarta <JakartaClock />
+          </span>
           <button type="button" className="lang" onClick={toggle} aria-label={t.nav.switchTo} title={t.nav.switchTo}>
-            {t.nav.switchShort}
+            <span aria-current={lang === 'en' ? 'true' : undefined}>EN</span> / <span aria-current={lang === 'id' ? 'true' : undefined}>ID</span>
           </button>
-          <a className="button button-small" href={`mailto:${EMAIL}`}>
+          <a className="bar-mail" href={`mailto:${EMAIL}`}>
             {t.nav.cta}
           </a>
         </div>
