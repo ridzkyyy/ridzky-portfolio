@@ -1,42 +1,16 @@
-import { useEffect, useState } from 'react';
 import { EMAIL, GITHUB, LINKEDIN } from '../i18n/content';
 import { useLang } from '../i18n/lang';
 import { BenchFigure } from './bench/BenchFigure';
 import { RouteField } from './RouteField';
-
-const CLOCK = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-/** Local time where I work, ticking once a second. */
-function JakartaClock() {
-  const [now, setNow] = useState(() => new Date());
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  return <time dateTime={now.toISOString()}>{CLOCK.format(now)}</time>;
-}
+import { JakartaClock } from './Clock';
+import { TopBar } from './TopBar';
 
 export function Hero() {
-  const { t, toggle } = useLang();
+  const { t } = useLang();
   const count = t.work.items.length + t.projects.items.length;
   return (
     <>
-      <div className="bar-shell">
-        <div className="bar wrap">
-          <a className="wordmark" href="#top">
-            Ridzky
-          </a>
-          <nav aria-label="Main">
-            <a href="#work">{t.nav.work}</a>
-            <a href="#projects">{t.nav.projects}</a>
-            <a href="#about">{t.nav.about}</a>
-            <a href="#contact">{t.nav.contact}</a>
-            <button type="button" className="lang" onClick={toggle} aria-label={t.nav.switchTo} title={t.nav.switchTo}>
-              {t.nav.switchShort}
-            </button>
-          </nav>
-        </div>
-      </div>
+      <TopBar />
       <header className="top spot">
         <RouteField />
         <div className="hero wrap" id="top">

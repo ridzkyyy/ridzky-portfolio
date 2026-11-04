@@ -58,7 +58,7 @@ const STACK = {
 };
 
 const en = {
-  nav: { work: 'Work', projects: 'Projects', about: 'About', contact: 'Contact', switchTo: 'Baca dalam Bahasa Indonesia', switchShort: 'ID' },
+  nav: { work: 'Work', projects: 'Projects', about: 'About', contact: 'Contact', switchTo: 'Baca dalam Bahasa Indonesia', switchShort: 'ID', tagline: 'Fleet, IoT and AI systems', status: 'Open to remote work', cta: 'Email me' },
   hero: {
     name: 'Ridzky Guntur Nuriawan',
     role: 'Technical Project Manager and backend engineer for fleet, IoT and AI systems.',
@@ -236,7 +236,7 @@ const en = {
 export type Content = typeof en;
 
 const id: Content = {
-  nav: { work: 'Karya', projects: 'Proyek', about: 'Tentang', contact: 'Kontak', switchTo: 'Read in English', switchShort: 'EN' },
+  nav: { work: 'Karya', projects: 'Proyek', about: 'Tentang', contact: 'Kontak', switchTo: 'Read in English', switchShort: 'EN', tagline: 'Sistem armada, IoT dan AI', status: 'Terbuka untuk remote', cta: 'Kirim email' },
   hero: {
     name: 'Ridzky Guntur Nuriawan',
     role: 'Technical Project Manager dan backend engineer untuk sistem armada, IoT dan AI.',

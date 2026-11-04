@@ -205,35 +205,145 @@ p {
 }
 
 .bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
-  min-height: 4.25rem;
+  min-height: 4.5rem;
 }
 
-.wordmark {
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+}
+
+.mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  transition: transform 500ms var(--ease-out);
+}
+
+.mark rect {
+  fill: var(--surface-2);
+  stroke: rgba(var(--accent-rgb), 0.35);
+}
+
+.mark path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 40;
+  animation: draw-route 2.4s var(--ease-out) both;
+}
+
+.mark circle {
+  fill: var(--warm);
+}
+
+@keyframes draw-route {
+  from {
+    stroke-dashoffset: 40;
+  }
+}
+
+.brand:hover .mark {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.brand-text {
+  display: grid;
+  line-height: 1.15;
+}
+
+.brand-text b {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 1.25rem;
-  text-decoration: none;
+  font-size: 1.0625rem;
+}
+
+.brand-text small {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+/* Availability, a real state, beside the time where I am. */
+.status {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.25rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+  .status {
+    display: none;
+  }
+}
+
+.status i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.18);
+}
+
+.status time {
+  font-family: var(--mono);
+  color: var(--ink);
 }
 
 .bar nav {
   display: flex;
-  align-items: center;
-  gap: clamp(0.9rem, 2.4vw, 2rem);
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: rgba(17, 25, 33, 0.7);
+  box-shadow: inset 0 0 0 1px var(--line);
   font-size: var(--step-small);
 }
 
 .bar nav a {
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
   color: var(--muted);
   text-decoration: none;
-  transition: color 150ms;
+  transition: color 150ms, background-color 250ms;
 }
 
 .bar nav a:hover {
   color: var(--ink);
+}
+
+.bar nav a[aria-current] {
+  background: var(--surface-2);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.35);
+}
+
+.bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.button-small {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  font-size: var(--step-small);
 }
 
 .lang {
@@ -817,6 +927,7 @@ p {
 }
 
 .impact li {
+  container-type: inline-size;
   display: grid;
   gap: 0.75rem;
   align-content: start;
@@ -831,7 +942,7 @@ p {
 
 .impact b {
   font-family: var(--display);
-  font-size: clamp(2.5rem, 1.4rem + 3vw, 4.5rem);
+  font-size: clamp(1.75rem, 17cqi, 4.5rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -1012,7 +1123,13 @@ p {
 }
 
 @media (max-width: 900px) {
-  .bar nav a {
+  .bar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .bar nav,
+  .status,
+  .brand-text small {
     display: none;
   }
 
