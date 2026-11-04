@@ -1,0 +1,82 @@
+/* Anatomy's light theme on frost and slate: the plate is one step darker than the page,
+   and teal is the one lit part. */
+.iso {
+  --anatomy-card: var(--surface);
+  --anatomy-paper: var(--surface);
+  --anatomy-text: var(--ink);
+  --anatomy-strong: var(--ink);
+  --anatomy-muted: var(--muted);
+  --anatomy-face: #fbfcfd;
+  --anatomy-top: #ffffff;
+  --anatomy-shade-0: #b4c1c7;
+  --anatomy-shade-1: #c8d2d7;
+  --anatomy-shade-2: #dfe6e9;
+  --anatomy-shade-3: #eaeff1;
+  --anatomy-lit-top: #d3eef0;
+  --anatomy-lit-shade: #a9d8dc;
+  --anatomy-hi: var(--ink);
+  --anatomy-mid: #566a73;
+  --anatomy-lo: #84959d;
+  --anatomy-faint: #b9c5ca;
+  --anatomy-lit: var(--accent);
+  --anatomy-halo: #6f838c;
+  --anatomy-halo-opacity: 0.3;
+  --anatomy-dot: #2a3c44;
+  --anatomy-weight: 0.6px;
+}
+
+.iso .iso-plate {
+  position: relative;
+  padding: clamp(0.75rem, 2vw, 1.75rem);
+  border-radius: 0;
+  background: var(--surface);
+}
+
+.iso-stage {
+  cursor: grab;
+  touch-action: pan-y;
+  border-radius: var(--radius);
+}
+
+.iso-stage[data-dragging] {
+  cursor: grabbing;
+}
+
+.plate-readout {
+  position: absolute;
+  right: clamp(0.75rem, 2vw, 1.75rem);
+  bottom: clamp(0.6rem, 1.6vw, 1.25rem);
+  font-size: var(--step-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.plate-caption {
+  margin-top: 0.75rem;
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.iso .iso-svg circle[data-led],
+.bench-led,
+.line-led {
+  fill: var(--anatomy-shade-0);
+  transition: fill 200ms;
+}
+
+.bench-led[data-on],
+[data-on] > .line-led {
+  fill: var(--accent);
+}
+
+.bench-fix {
+  fill: var(--accent);
+}
+
+.bench-cable {
+  fill: none;
+  stroke: var(--anatomy-shade-1);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
