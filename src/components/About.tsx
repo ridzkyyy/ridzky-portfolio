@@ -4,7 +4,8 @@ export function About() {
   const { t } = useLang();
   const a = t.about;
   return (
-    <section className="section wrap about" id="about" aria-labelledby="about-heading">
+    <section className="paper" id="about" aria-labelledby="about-heading">
+      <div className="wrap about">
       <div className="about-text reveal">
         <h2 id="about-heading">{a.title}</h2>
         {a.text.map((p) => (
@@ -29,6 +30,7 @@ export function About() {
             </div>
           ))}
         </dl>
+      </div>
       </div>
     </section>
   );

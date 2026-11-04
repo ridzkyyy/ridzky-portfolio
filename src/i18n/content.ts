@@ -36,7 +36,10 @@ export interface CaseStudy {
   stages?: Stage[];
 }
 
+export type ProjectGroup = 'fleet' | 'ai' | 'platform' | 'web';
+
 export interface Project {
+  group: ProjectGroup;
   name: string;
   kind: string;
   what: string;
@@ -62,6 +65,7 @@ const en = {
     intro: 'I lead and build the software behind GPS tracking, telemetry pipelines and driver-safety AI, and I ship my own products on the side. Based in Jakarta, open to remote work.',
     primary: 'Email me',
     secondary: 'See my work',
+    readout: { label: 'Where I am', base: 'Base, Jakarta', time: 'Local time', count: 'Projects on this page' },
   },
   work: {
     title: 'Selected work',
@@ -171,17 +175,26 @@ const en = {
     ] as CaseStudy[],
   },
   projects: {
-    title: 'More projects',
+    title: 'Everything else I built',
+    filters: { all: 'All', fleet: 'Fleet and maps', ai: 'AI', platform: 'Platforms and tools', web: 'Web and personal' },
     items: [
-      { name: 'Driver fatigue validator', kind: 'AI, computer vision', what: 'Checks dashcam fatigue alarms with face inference so only real incidents reach the ops team.' },
-      { name: 'CAN bus decoder', kind: 'CLI tool', what: 'Reads engine data from trucks and heavy equipment: J1939, DBC and OBD-II in one binary.' },
-      { name: 'Telematics hub', kind: 'Self-hosted platform', what: 'Any GPS tracker in, one clean data shape out, with analytics and forwarding set up without code.' },
-      { name: 'Mine control room', kind: 'Dashboard', what: 'A live map of an open-pit haul fleet, built to be read at a glance in a dark room.', image: { src: '/media/private/mine-map.jpg', alt: 'Blurred screenshot of the mine fleet map', blurred: true } },
-      { name: 'Harvest control tower', kind: 'Prototype, agritech', what: 'Palm-oil harvest blocks, crews and haul trucks on one live map, from field progress to profit per block.', image: { src: '/media/private/harvest-map.jpg', alt: 'Blurred screenshot of the plantation harvest map', blurred: true } },
-      { name: 'Ops command dashboard', kind: 'Internal tool, AI agent', what: 'One workspace for five teams, replacing scattered spreadsheets, with an agent over read-only data.' },
-      { name: 'Trip and idle engine', kind: 'Data engineering', what: 'Turns raw positions into structured trips, with idempotent writes so reruns are safe.' },
-      { name: 'Payload tablet', kind: 'Android, offline-first', what: 'Reads sensors in an excavator cab and syncs when the signal comes back.' },
-      { name: 'Invitation and photobooth', kind: 'Personal', what: 'My wedding invitation with RSVP per guest, plus a photobooth that prints strips instead of souvenirs.' },
+      { group: 'fleet', name: 'Video telematics platform', kind: 'Platform, live video', what: 'One gateway and media server for dashcams from several vendors: live video, alarms and evidence clips in one console.', image: { src: '/media/private/video-telematics.jpg', alt: 'Blurred screenshot of the live video telematics map', blurred: true } },
+      { group: 'platform', name: 'Telematics hub', kind: 'Self-hosted platform', what: 'Any GPS tracker in, one clean data shape out, with analytics and forwarding set up without code.', image: { src: '/media/private/telematics-hub.jpg', alt: 'Blurred screenshot of the telematics hub summary page', blurred: true } },
+      { group: 'ai', name: 'Driver fatigue validator', kind: 'AI, computer vision', what: 'Checks dashcam fatigue alarms with face inference, so the ops console only shows the alarms that hold up.', image: { src: '/media/private/fatigue-monitor.jpg', alt: 'Blurred screenshot of the fatigue monitoring console', blurred: true } },
+      { group: 'fleet', name: 'Mine control room', kind: 'Dashboard', what: 'A live map of an open-pit haul fleet, built to be read at a glance in a dark room.', image: { src: '/media/private/mine-map.jpg', alt: 'Blurred screenshot of the mine fleet map', blurred: true } },
+      { group: 'fleet', name: 'Mine idle map', kind: 'Dashboard, mining', what: 'Idle time and speed by zone, drawn over a drone orthophoto of the pit, for every dashcam unit on site.', image: { src: '/media/private/idle-map.jpg', alt: 'Blurred screenshot of the mine idle map over an orthophoto', blurred: true } },
+      { group: 'fleet', name: 'Harvest control tower', kind: 'Prototype, agritech', what: 'Palm-oil harvest blocks, crews and haul trucks on one live map, from field progress to profit per block.', image: { src: '/media/private/harvest-map.jpg', alt: 'Blurred screenshot of the plantation harvest map', blurred: true } },
+      { group: 'web', name: 'Office records app', kind: 'Web app, public sector', what: 'Incoming and outgoing letters, archive search and an asset register for a government office.', image: { src: '/media/private/office-archive.jpg', alt: 'Blurred screenshot of the office records upload form', blurred: true } },
+      { group: 'web', name: 'Invitation and photobooth', kind: 'Personal', what: 'My wedding invitation with RSVP per guest, plus a photobooth that prints strips instead of souvenirs.', image: { src: '/media/private/wedding.jpg', alt: 'Blurred screenshot of the wedding invitation', blurred: true } },
+      { group: 'ai', name: 'Mine safety AI console', kind: 'AI, dashboard', what: 'Alarm validation, evidence clips, live streams and intercom for the dashcams on a mining site.' },
+      { group: 'ai', name: 'Ops command dashboard', kind: 'Internal tool, AI agent', what: 'One workspace for five teams, replacing scattered spreadsheets, with an agent over read-only data.' },
+      { group: 'fleet', name: 'Dashcam video console', kind: 'Web and mobile', what: 'A custom front end over a video telematics server. Unfinished modules are hidden instead of left as dead ends.' },
+      { group: 'fleet', name: 'Unit support tracker', kind: 'Full-stack, live map', what: 'Live map, tracks and replay for a mine support fleet, merging dashcam and GPS sources into one status legend.' },
+      { group: 'fleet', name: 'Payload trip console', kind: 'Full-stack', what: 'A fleet map with an objects panel and a trip timeline, where every trip carries the average payload it hauled.' },
+      { group: 'fleet', name: 'Payload tablet', kind: 'Android, offline-first', what: 'Reads sensors in an excavator cab and syncs when the signal comes back.' },
+      { group: 'platform', name: 'CAN bus decoder', kind: 'CLI tool', what: 'Reads engine data from trucks and heavy equipment: J1939, DBC and OBD-II in one binary.' },
+      { group: 'platform', name: 'Trip and idle engine', kind: 'Data engineering', what: 'Turns raw positions into structured trips, with idempotent writes so reruns are safe.' },
+      { group: 'platform', name: 'Data bridges', kind: 'Backend services', what: 'Small services that move telemetry between trackers, analytics stores and partner APIs: hourly batches, alarm forwarding, an FMS proxy.' },
     ] as Project[],
   },
   impact: {
@@ -230,6 +243,7 @@ const id: Content = {
     intro: 'Saya memimpin dan membangun software di balik pemantauan GPS, pipeline telemetri dan AI keselamatan pengemudi, dan merilis produk saya sendiri di luar jam kerja. Berbasis di Jakarta, terbuka untuk kerja remote.',
     primary: 'Kirim email',
     secondary: 'Lihat karya saya',
+    readout: { label: 'Posisi saya', base: 'Basis, Jakarta', time: 'Waktu lokal', count: 'Proyek di halaman ini' },
   },
   work: {
     title: 'Karya pilihan',
@@ -329,17 +343,26 @@ const id: Content = {
     ],
   },
   projects: {
-    title: 'Proyek lainnya',
+    title: 'Semua proyek lainnya',
+    filters: { all: 'Semua', fleet: 'Armada dan peta', ai: 'AI', platform: 'Platform dan tool', web: 'Web dan pribadi' },
     items: [
-      { name: 'Validator kelelahan sopir', kind: 'AI, computer vision', what: 'Memeriksa alarm kelelahan dari dashcam dengan inferensi wajah, jadi hanya insiden nyata yang sampai ke tim ops.' },
-      { name: 'Dekoder CAN bus', kind: 'Tool CLI', what: 'Membaca data mesin truk dan alat berat: J1939, DBC dan OBD-II dalam satu binary.' },
-      { name: 'Telematics hub', kind: 'Platform self-hosted', what: 'Tracker GPS apa pun masuk, satu bentuk data rapi keluar, dengan analitik dan penerusan tanpa kode.' },
-      { name: 'Control room tambang', kind: 'Dashboard', what: 'Peta langsung armada haul truck tambang terbuka, dibuat agar terbaca sekilas di ruangan gelap.', image: { src: '/media/private/mine-map.jpg', alt: 'Tangkapan layar buram peta armada tambang', blurred: true } },
-      { name: 'Menara kendali panen', kind: 'Prototipe, agritech', what: 'Blok panen sawit, kemandoran dan truk angkut di satu peta langsung, dari progres lapangan sampai profit per blok.', image: { src: '/media/private/harvest-map.jpg', alt: 'Tangkapan layar buram peta panen perkebunan', blurred: true } },
-      { name: 'Dashboard komando ops', kind: 'Tool internal, agen AI', what: 'Satu workspace untuk lima tim, menggantikan spreadsheet yang tercecer, dengan agen di atas data read-only.' },
-      { name: 'Mesin trip dan idle', kind: 'Data engineering', what: 'Mengubah posisi mentah menjadi trip terstruktur, dengan penulisan idempoten agar aman dijalankan ulang.' },
-      { name: 'Tablet payload', kind: 'Android, offline-first', what: 'Membaca sensor di kabin ekskavator dan sinkron saat sinyal kembali.' },
-      { name: 'Undangan dan photobooth', kind: 'Pribadi', what: 'Undangan pernikahan saya dengan RSVP per tamu, plus photobooth yang mencetak strip foto pengganti souvenir.' },
+      { group: 'fleet', name: 'Platform video telematika', kind: 'Platform, video langsung', what: 'Satu gateway dan media server untuk dashcam dari beberapa vendor: video langsung, alarm dan klip bukti dalam satu konsol.', image: { src: '/media/private/video-telematics.jpg', alt: 'Tangkapan layar buram peta video telematika', blurred: true } },
+      { group: 'platform', name: 'Telematics hub', kind: 'Platform self-hosted', what: 'Tracker GPS apa pun masuk, satu bentuk data rapi keluar, dengan analitik dan penerusan tanpa kode.', image: { src: '/media/private/telematics-hub.jpg', alt: 'Tangkapan layar buram halaman ringkasan telematics hub', blurred: true } },
+      { group: 'ai', name: 'Validator kelelahan sopir', kind: 'AI, computer vision', what: 'Memeriksa alarm kelelahan dari dashcam dengan inferensi wajah, jadi konsol ops hanya menampilkan alarm yang terbukti.', image: { src: '/media/private/fatigue-monitor.jpg', alt: 'Tangkapan layar buram konsol monitoring kelelahan', blurred: true } },
+      { group: 'fleet', name: 'Control room tambang', kind: 'Dashboard', what: 'Peta langsung armada haul truck tambang terbuka, dibuat agar terbaca sekilas di ruangan gelap.', image: { src: '/media/private/mine-map.jpg', alt: 'Tangkapan layar buram peta armada tambang', blurred: true } },
+      { group: 'fleet', name: 'Peta idle tambang', kind: 'Dashboard, tambang', what: 'Waktu idle dan kecepatan per zona, digambar di atas ortofoto drone area tambang, untuk setiap unit dashcam di site.', image: { src: '/media/private/idle-map.jpg', alt: 'Tangkapan layar buram peta idle tambang di atas ortofoto', blurred: true } },
+      { group: 'fleet', name: 'Menara kendali panen', kind: 'Prototipe, agritech', what: 'Blok panen sawit, kemandoran dan truk angkut di satu peta langsung, dari progres lapangan sampai profit per blok.', image: { src: '/media/private/harvest-map.jpg', alt: 'Tangkapan layar buram peta panen perkebunan', blurred: true } },
+      { group: 'web', name: 'Aplikasi arsip kantor', kind: 'Web app, sektor publik', what: 'Surat masuk dan keluar, pencarian arsip dan daftar inventaris untuk sebuah kantor pemerintah.', image: { src: '/media/private/office-archive.jpg', alt: 'Tangkapan layar buram form unggah surat', blurred: true } },
+      { group: 'web', name: 'Undangan dan photobooth', kind: 'Pribadi', what: 'Undangan pernikahan saya dengan RSVP per tamu, plus photobooth yang mencetak strip foto pengganti souvenir.', image: { src: '/media/private/wedding.jpg', alt: 'Tangkapan layar buram undangan pernikahan', blurred: true } },
+      { group: 'ai', name: 'Konsol AI keselamatan tambang', kind: 'AI, dashboard', what: 'Validasi alarm, klip bukti, live stream dan interkom untuk dashcam di sebuah site tambang.' },
+      { group: 'ai', name: 'Dashboard komando ops', kind: 'Tool internal, agen AI', what: 'Satu workspace untuk lima tim, menggantikan spreadsheet yang tercecer, dengan agen di atas data read-only.' },
+      { group: 'fleet', name: 'Konsol video dashcam', kind: 'Web dan mobile', what: 'Front end kustom di atas server video telematika. Modul yang belum jadi disembunyikan, bukan dibiarkan jadi jalan buntu.' },
+      { group: 'fleet', name: 'Pelacak unit support', kind: 'Full-stack, peta langsung', what: 'Peta langsung, track dan replay untuk armada support tambang, menggabungkan sumber dashcam dan GPS dalam satu legenda status.' },
+      { group: 'fleet', name: 'Konsol trip payload', kind: 'Full-stack', what: 'Peta armada dengan panel objek dan timeline trip, setiap trip membawa rata-rata muatan yang diangkut.' },
+      { group: 'fleet', name: 'Tablet payload', kind: 'Android, offline-first', what: 'Membaca sensor di kabin ekskavator dan sinkron saat sinyal kembali.' },
+      { group: 'platform', name: 'Dekoder CAN bus', kind: 'Tool CLI', what: 'Membaca data mesin truk dan alat berat: J1939, DBC dan OBD-II dalam satu binary.' },
+      { group: 'platform', name: 'Mesin trip dan idle', kind: 'Data engineering', what: 'Mengubah posisi mentah menjadi trip terstruktur, dengan penulisan idempoten agar aman dijalankan ulang.' },
+      { group: 'platform', name: 'Jembatan data', kind: 'Layanan backend', what: 'Layanan kecil yang memindahkan telemetri antara tracker, penyimpanan analitik dan API mitra: batch per jam, penerusan alarm, proxy FMS.' },
     ],
   },
   impact: {
