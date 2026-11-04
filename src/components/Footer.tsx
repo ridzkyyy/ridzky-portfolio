@@ -5,7 +5,7 @@ export function Footer() {
   const { t } = useLang();
   return (
     <footer className="end" id="contact">
-      <div className="wrap contact">
+      <div className="wrap contact reveal">
         <h2>{t.contact.title}</h2>
         <p>{t.contact.text}</p>
         <div className="actions">

@@ -129,13 +129,33 @@ p {
 
 /* Top bar */
 .top {
-  padding-bottom: clamp(2rem, 6vw, 5rem);
+  position: relative;
+  isolation: isolate;
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+  background: linear-gradient(180deg, #f4f8f9 0%, var(--bg) 100%);
 }
 
-.bar {
+/* Moving vehicles on a faint street network, fading out toward the content below. */
+.route-field {
+  --route-road: rgba(20, 26, 33, 0.06);
+  --route-dot: #0d7480;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  mask-image: radial-gradient(120% 90% at 70% 40%, #000 35%, transparent 85%);
+}
+
+.bar-shell {
   position: sticky;
   top: 0;
   z-index: 10;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: saturate(1.4) blur(10px);
+}
+
+.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -143,9 +163,7 @@ p {
   min-height: 4.25rem;
 }
 
-.top > .bar {
-  background: var(--bg);
-}
+
 
 .wordmark {
   font-weight: 600;
@@ -190,17 +208,41 @@ p {
 
 /* Hero */
 .hero {
-  padding-top: clamp(3rem, 10vh, 7rem);
+  padding-top: clamp(2.5rem, 8vh, 6rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+.hero-text {
   display: grid;
   gap: 1.25rem;
   justify-items: start;
+}
+
+.hero-figure {
+  animation: float-in 1100ms var(--ease-out) 200ms both;
+}
+
+.hero-figure .iso-plate {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 30px 60px -30px rgba(20, 26, 33, 0.25);
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
 }
 
 .hero h1 {
   font-size: var(--step-display);
   letter-spacing: -0.04em;
   line-height: 1;
-  max-width: 14ch;
+  max-width: 12ch;
   animation: rise 800ms var(--ease-out) both;
 }
 
@@ -289,9 +331,47 @@ p {
   bottom: -2rem;
 }
 
-.case-media-figure {
-  padding: 0;
-  overflow: hidden;
+.case-media img {
+  transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
+}
+
+.case:hover .case-media img:first-child {
+  transform: translateY(-6px);
+  box-shadow: 0 1px 2px rgba(20, 26, 33, 0.06), 0 24px 48px -16px rgba(20, 26, 33, 0.3);
+}
+
+.case:hover .case-media img.case-shot-second {
+  transform: translate(8px, -10px) rotate(-1deg);
+}
+
+@supports (animation-timeline: view()) {
+  .case-media img.case-shot-second {
+    animation: drift-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 60%;
+  }
+
+  @keyframes drift-up {
+    from {
+      translate: 0 48px;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+}
+
+/* Private work is shown only as screens blurred in the file itself. */
+.privacy {
+  position: absolute;
+  left: clamp(1.5rem, 3.5vw, 2.75rem);
+  top: clamp(1.5rem, 3.5vw, 2.75rem);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(20, 26, 33, 0.78);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
 }
 
 .case-copy {
@@ -396,6 +476,30 @@ p {
   align-content: start;
 }
 
+.project-shot {
+  position: relative;
+  margin-bottom: 0.9rem;
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.project-shot img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 700ms var(--ease-out);
+}
+
+.project-list li:hover .project-shot img {
+  transform: scale(1.04);
+}
+
+.project-shot .privacy {
+  left: 0.85rem;
+  top: 0.85rem;
+}
+
 .project-list h3 {
   font-size: 1.1875rem;
 }
@@ -435,7 +539,7 @@ p {
   font-variant-numeric: tabular-nums;
 }
 
-.impact span {
+.impact li > span {
   color: var(--muted);
   font-size: var(--step-small);
   max-width: 26ch;
@@ -563,9 +667,27 @@ p {
   color: #f2f5f7;
 }
 
+/* Entrance: only when script runs and motion is allowed. */
+.motion .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 800ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 800ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.motion .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
 @media (max-width: 900px) {
   .bar nav a {
     display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
   }
 
   .case,
@@ -596,7 +718,9 @@ p {
   .hero h1,
   .hero-role,
   .hero-intro,
-  .hero .actions {
+  .hero .actions,
+  .hero-figure,
+  .case-media img.case-shot-second {
     animation: none;
   }
 }
