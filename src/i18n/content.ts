@@ -219,7 +219,7 @@ const id: Content = {
   hero: {
     name: 'Ridzky Guntur Nuriawan',
     role: 'Technical Project Manager dan backend engineer untuk sistem armada, IoT dan AI.',
-    intro: 'Saya memimpin dan membangun software di balik pelacakan GPS, pipeline telemetri dan AI keselamatan pengemudi, dan merilis produk saya sendiri di luar jam kerja. Berbasis di Jakarta, terbuka untuk kerja remote.',
+    intro: 'Saya memimpin dan membangun software di balik pemantauan GPS, pipeline telemetri dan AI keselamatan pengemudi, dan merilis produk saya sendiri di luar jam kerja. Berbasis di Jakarta, terbuka untuk kerja remote.',
     primary: 'Kirim email',
     secondary: 'Lihat karya saya',
   },
