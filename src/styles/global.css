@@ -364,6 +364,20 @@ p {
   color: var(--accent-ink);
 }
 
+/* Moving mesh gradient under the hero map and the contact close. */
+.shader-field {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  mask-image: linear-gradient(180deg, #000 70%, transparent);
+}
+
+.end .shader-field {
+  mask-image: linear-gradient(0deg, #000 60%, transparent);
+}
+
 /* Hero: the night map, lit where the cursor is. */
 .top {
   position: relative;
@@ -391,7 +405,7 @@ p {
 }
 
 .hero {
-  padding-top: clamp(3rem, 10vh, 7rem);
+  padding-top: clamp(2.5rem, 7vh, 5rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-areas: 'name name' 'text figure' 'readout readout';
@@ -477,6 +491,10 @@ p {
   animation: float-in 1100ms var(--ease-out) 300ms both;
 }
 
+.hero-figure .iso-stage svg {
+  max-height: 46vh;
+}
+
 .hero-figure .iso-plate {
   background: rgba(17, 25, 33, 0.55);
   backdrop-filter: blur(8px);
@@ -499,37 +517,93 @@ p {
   }
 }
 
-/* Telemetry readout under the hero: where I am and what time it is there. */
-.readout {
+.hero-statement {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+  animation: rise 800ms var(--ease-out) 150ms both;
+}
+
+.hero-statement + .hero-role {
+  color: var(--muted);
+  font-size: var(--step-body);
+}
+
+/* Outcomes first: each one links to the case that explains it. */
+.outcomes {
   grid-area: readout;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: clamp(1rem, 3vw, 2.5rem);
-  border-top: 1px solid var(--line);
   animation: rise 800ms var(--ease-out) 500ms both;
 }
 
-.readout div {
-  display: grid;
-  gap: 0.3rem;
-  padding: 1rem 1rem 0 0;
-}
-
-.readout div + div {
-  padding-left: 1rem;
-  border-left: 1px solid var(--line);
-}
-
-.readout dt {
+.outcomes-title,
+.outcomes-note {
   color: var(--muted);
   font-size: 0.8125rem;
 }
 
-.readout dd {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 0.9375rem;
-  font-variant-numeric: tabular-nums;
+.outcomes ol {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+}
+
+.outcomes a {
+  display: grid;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-media);
+  background: rgba(17, 25, 33, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px var(--line);
+  text-decoration: none;
+  transition: box-shadow 250ms, transform 400ms var(--ease-out);
+}
+
+.outcomes a:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.5), 0 20px 40px -24px rgba(var(--accent-rgb), 0.5);
+}
+
+.outcomes b {
+  font-family: var(--display);
+  font-size: clamp(2rem, 1.2rem + 2vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.outcomes small,
+.case-outcome small {
+  font-family: var(--face);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.outcomes span {
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.outcomes em {
+  margin-top: 0.4rem;
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+
+.outcomes em::after {
+  content: ' →';
   color: var(--accent);
 }
 
@@ -545,7 +619,15 @@ p {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   grid-template-areas: 'media copy' 'stages stages';
   gap: clamp(1.75rem, 4vw, 4rem);
-  align-items: center;
+  align-items: start;
+}
+
+/* The screen stays in view while the story beside it is read. */
+@media (min-width: 901px) {
+  .case-media {
+    position: sticky;
+    top: 6.5rem;
+  }
 }
 
 .case:nth-child(even) {
@@ -664,6 +746,124 @@ p {
   display: grid;
   gap: 1rem;
   justify-items: start;
+}
+
+.work-head {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 46rem;
+}
+
+.work-head p {
+  color: var(--muted);
+  font-size: var(--step-lead);
+}
+
+/* The case leads with what changed, then tells the shift from before to after. */
+.case-outcome {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 0.6rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-control);
+  background: rgba(var(--accent-rgb), 0.08);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.25);
+}
+
+.case-outcome b {
+  font-family: var(--display);
+  font-size: clamp(2rem, 1.3rem + 2vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.case-outcome span {
+  grid-column: 1 / -1;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.shift {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.shift li {
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-control);
+  font-size: var(--step-small);
+}
+
+.shift span {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.shift-before {
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.shift-before span {
+  color: var(--warm);
+}
+
+.shift-after {
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.3);
+}
+
+.shift-after span {
+  color: var(--accent);
+}
+
+.shift-after::before {
+  content: '→';
+  position: absolute;
+  left: -0.95rem;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.75rem;
+}
+
+.did {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.more {
+  margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.more span {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
 .case-index {
@@ -1031,6 +1231,7 @@ p {
 /* Contact close */
 .end {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   background: radial-gradient(60% 80% at 80% 100%, rgba(var(--accent-rgb), 0.14), transparent 70%), var(--bg);
 }
@@ -1138,13 +1339,16 @@ p {
     grid-template-areas: 'name' 'text' 'figure' 'readout';
   }
 
-  .readout {
+  .outcomes ol,
+  .shift {
     grid-template-columns: 1fr;
   }
 
-  .readout div + div {
-    padding-left: 0;
-    border-left: 0;
+  .shift-after::before {
+    left: 50%;
+    top: -0.95rem;
+    translate: -50% 0;
+    rotate: 90deg;
   }
 
   .case,
@@ -1189,7 +1393,8 @@ p {
   .hero-intro,
   .hero .actions,
   .hero-figure,
-  .readout,
+  .outcomes,
+  .hero-statement,
   .case-media::before,
   .case-media img,
   .progress {
@@ -1205,4 +1410,9 @@ p {
   .tile-shot img {
     transition: none;
   }
+}
+
+.hero-intro strong {
+  color: var(--ink);
+  font-weight: 500;
 }

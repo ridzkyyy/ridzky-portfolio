@@ -2,22 +2,24 @@ import { EMAIL, GITHUB, LINKEDIN } from '../i18n/content';
 import { useLang } from '../i18n/lang';
 import { BenchFigure } from './bench/BenchFigure';
 import { RouteField } from './RouteField';
-import { JakartaClock } from './Clock';
+import { ShaderField } from './ShaderField';
 import { TopBar } from './TopBar';
 
 export function Hero() {
   const { t } = useLang();
-  const count = t.work.items.length + t.projects.items.length;
   return (
     <>
       <TopBar />
       <header className="top spot">
+        <ShaderField colors={['#0e5e66', '#24196a', '#d9822b']} background="#0a0f14" focus={[0.74, 0.5]} />
         <RouteField />
         <div className="hero wrap" id="top">
           <h1>{t.hero.name}</h1>
           <div className="hero-text">
-            <p className="hero-role">{t.hero.role}</p>
-            <p className="hero-intro">{t.hero.intro}</p>
+            <p className="hero-statement">{t.hero.statement}</p>
+            <p className="hero-intro">
+              <strong>{t.hero.role}</strong> {t.hero.intro}
+            </p>
             <div className="actions">
               <a className="button" href={`mailto:${EMAIL}`}>
                 {t.hero.primary}
@@ -35,22 +37,25 @@ export function Hero() {
               </span>
             </div>
           </div>
-          <dl className="readout" aria-label={t.hero.readout.label}>
-            <div>
-              <dt>{t.hero.readout.base}</dt>
-              <dd>−6.2088, 106.8456</dd>
-            </div>
-            <div>
-              <dt>{t.hero.readout.time}</dt>
-              <dd>
-                <JakartaClock /> UTC+7
-              </dd>
-            </div>
-            <div>
-              <dt>{t.hero.readout.count}</dt>
-              <dd>{count}</dd>
-            </div>
-          </dl>
+          <div className="outcomes">
+            <p className="outcomes-title">{t.hero.outcomesTitle}</p>
+            <ol>
+              {t.work.items
+                .filter((item) => item.before)
+                .map((item) => (
+                  <li key={item.id}>
+                    <a href={`#case-${item.id}`}>
+                      <b>
+                        {item.outcome.value} <small>{item.outcome.unit}</small>
+                      </b>
+                      <span>{item.outcome.label}</span>
+                      <em>{item.title}</em>
+                    </a>
+                  </li>
+                ))}
+            </ol>
+            <p className="outcomes-note">{t.hero.estimate}</p>
+          </div>
           <div className="hero-figure">
             <BenchFigure label={t.work.benchLabel} readout={t.work.benchReadout} />
           </div>

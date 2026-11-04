@@ -5,6 +5,7 @@ import { useLang } from '../i18n/lang';
 
 type Filter = 'all' | ProjectGroup;
 const FILTERS: Filter[] = ['all', 'fleet', 'ai', 'platform', 'web'];
+const FIRST_LOOK = 8;
 
 const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -56,8 +57,11 @@ function Tile({ p, index, span, blurred }: { p: Project; index: number; span: nu
 export function Projects() {
   const { t } = useLang();
   const [filter, setFilter] = useState<Filter>('all');
+  const [expanded, setExpanded] = useState(false);
   const all = t.projects.items;
-  const shown = filter === 'all' ? all : all.filter((p) => p.group === filter);
+  const matching = filter === 'all' ? all : all.filter((p) => p.group === filter);
+  // The strongest screens lead; the rest wait behind one button so the page keeps its focus.
+  const shown = expanded ? matching : matching.slice(0, FIRST_LOOK);
   const widths = spans(shown);
   return (
     <section className="gallery" id="projects" aria-labelledby="projects-heading">
@@ -80,6 +84,11 @@ export function Projects() {
             <Tile key={p.name} p={p} index={all.indexOf(p)} span={widths[i]} blurred={t.work.blurred} />
           ))}
         </ul>
+        {shown.length < matching.length ? (
+          <button type="button" className="button button-quiet more" onClick={() => morph(() => setExpanded(true))}>
+            {t.projects.more} <span>{matching.length}</span>
+          </button>
+        ) : null}
       </div>
     </section>
   );

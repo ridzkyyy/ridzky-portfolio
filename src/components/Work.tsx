@@ -47,7 +47,24 @@ function Case({ item, index, total }: { item: CaseStudy; index: number; total: n
         </p>
         <p className="tag">{item.tag}</p>
         <h3 id={`case-${item.id}`}>{item.title}</h3>
+        <p className="case-outcome">
+          <b>{item.outcome.value}</b> <small>{item.outcome.unit}</small>
+          <span>{item.outcome.label}</span>
+        </p>
         <p className="case-summary">{item.summary}</p>
+        {item.before && item.after ? (
+          <ol className="shift">
+            <li className="shift-before">
+              <span>{t.work.before}</span>
+              {item.before}
+            </li>
+            <li className="shift-after">
+              <span>{t.work.after}</span>
+              {item.after}
+            </li>
+          </ol>
+        ) : null}
+        <p className="did">{t.work.did}</p>
         <ul className="points">
           {item.points.map((p) => (
             <li key={p}>{p}</li>
@@ -79,7 +96,10 @@ export function Work() {
   const { t } = useLang();
   return (
     <section className="section wrap" id="work" aria-labelledby="work-heading">
-      <h2 id="work-heading" className="reveal">{t.work.title}</h2>
+      <div className="work-head reveal">
+        <h2 id="work-heading">{t.work.title}</h2>
+        <p>{t.work.lede}</p>
+      </div>
       <div className="cases">
         {t.work.items.map((item, i) => (
           <Case key={item.id} item={item} index={i} total={t.work.items.length} />

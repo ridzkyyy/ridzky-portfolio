@@ -1,10 +1,12 @@
 import { EMAIL, GITHUB, LINKEDIN } from '../i18n/content';
 import { useLang } from '../i18n/lang';
+import { ShaderField } from './ShaderField';
 
 export function Footer() {
   const { t } = useLang();
   return (
     <footer className="end" id="contact">
+      <ShaderField colors={['#0e5e66', '#24196a', '#3fd2c7']} background="#0a0f14" focus={[0.78, 0.2]} />
       <div className="wrap contact reveal">
         <h2>{t.contact.title}</h2>
         <p>{t.contact.text}</p>
