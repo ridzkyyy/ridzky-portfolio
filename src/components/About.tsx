@@ -13,6 +13,7 @@ export function About() {
         ))}
       </div>
       <div className="about-side reveal">
+        <img className="portrait" src="/media/me-portrait.jpg" alt={a.portraitAlt} width={600} height={800} loading="lazy" />
         <dl className="pairs">
           {a.facts.map((f) => (
             <div key={f.k}>

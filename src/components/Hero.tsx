@@ -15,13 +15,15 @@ export function Hero() {
         <div className="hero wrap" id="top">
           <h1 aria-label={`${t.hero.greeting.join(' ')} ${t.hero.name}`}>
             {t.hero.greeting[0]}{' '}
-            <span className="monogram" aria-hidden="true">
-              RG
-            </span>{' '}
+            <img className="avatar" src="/media/me-face.jpg" alt="" width={240} height={240} />{' '}
             {t.hero.greeting[1]}
           </h1>
           <div className="hero-text">
-            <p className="hero-statement">{t.hero.statement}</p>
+            <p className="hero-statement">
+              {t.hero.statement[0]}
+              <em>{t.hero.statement[1]}</em>
+              {t.hero.statement[2]}
+            </p>
             <p className="hero-intro">
               <strong>{t.hero.role}</strong> {t.hero.intro}
             </p>
