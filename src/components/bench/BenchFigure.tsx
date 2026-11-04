@@ -11,7 +11,7 @@ const TRAVEL_S = 1.2;
 const LABEL =
   'A GPS tracker on a workbench, cabled to an edge gateway. Every few seconds the tracker sends a position fix down the cable and the gateway lights when it arrives.';
 
-export function BenchFigure({ label, readout, caption }: { label: string; readout: string; caption: string }) {
+export function BenchFigure({ label, readout }: { label: string; readout: string }) {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -72,7 +72,6 @@ export function BenchFigure({ label, readout, caption }: { label: string; readou
         <div ref={stageRef} className="iso-stage" tabIndex={0} aria-label={label} />
         <p className="plate-readout">{readout}</p>
       </div>
-      <figcaption className="plate-caption">{caption}</figcaption>
     </figure>
   );
 }

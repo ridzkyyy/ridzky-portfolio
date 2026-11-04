@@ -1,26 +1,26 @@
 :root {
-  /* Frost and slate: cool paper, one blue-grey step, slate ink, a single teal accent. */
-  --bg: #f7f9fa;
-  --surface: #ecf0f2;
-  --surface-2: #e2e8eb;
-  --ink: #1f3038;
-  --muted: #5d6b72;
+  --bg: #ffffff;
+  --surface: #f3f5f7;
+  --surface-2: #e7ebef;
+  --ink: #141a21;
+  --muted: #5a6573;
   --accent: #0d7480;
+  --accent-strong: #0a5f69;
   --accent-ink: #ffffff;
 
   --face: 'Switzer', system-ui, sans-serif;
 
-  --step-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
-  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
-  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --step-small: 0.9375rem;
+  --step-body: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  --step-lead: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  --step-title: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  --step-display: clamp(2.75rem, 1.2rem + 6vw, 6rem);
 
-  --margin: clamp(1.25rem, 2.2vw, 2rem);
-  --align: max(var(--margin), 22vw);
-  --column: 560px;
-  --section-gap: clamp(6rem, 4rem + 8vw, 11rem);
-  --radius: 4px;
+  --wrap: 1180px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-gap: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --radius-media: 14px;
+  --radius-control: 8px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration: 650ms;
 }
