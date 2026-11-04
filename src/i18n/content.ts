@@ -357,7 +357,7 @@ const id: Content = {
       { group: 'ai', name: 'Konsol AI keselamatan tambang', kind: 'AI, dashboard', what: 'Validasi alarm, klip bukti, live stream dan interkom untuk dashcam di sebuah site tambang.' },
       { group: 'ai', name: 'Dashboard komando ops', kind: 'Tool internal, agen AI', what: 'Satu workspace untuk lima tim, menggantikan spreadsheet yang tercecer, dengan agen di atas data read-only.' },
       { group: 'fleet', name: 'Konsol video dashcam', kind: 'Web dan mobile', what: 'Front end kustom di atas server video telematika. Modul yang belum jadi disembunyikan, bukan dibiarkan jadi jalan buntu.' },
-      { group: 'fleet', name: 'Pelacak unit support', kind: 'Full-stack, peta langsung', what: 'Peta langsung, track dan replay untuk armada support tambang, menggabungkan sumber dashcam dan GPS dalam satu legenda status.' },
+      { group: 'fleet', name: 'Pemantau unit support', kind: 'Full-stack, peta langsung', what: 'Peta langsung, track dan replay untuk armada support tambang, menggabungkan sumber dashcam dan GPS dalam satu legenda status.' },
       { group: 'fleet', name: 'Konsol trip payload', kind: 'Full-stack', what: 'Peta armada dengan panel objek dan timeline trip, setiap trip membawa rata-rata muatan yang diangkut.' },
       { group: 'fleet', name: 'Tablet payload', kind: 'Android, offline-first', what: 'Membaca sensor di kabin ekskavator dan sinkron saat sinyal kembali.' },
       { group: 'platform', name: 'Dekoder CAN bus', kind: 'Tool CLI', what: 'Membaca data mesin truk dan alat berat: J1939, DBC dan OBD-II dalam satu binary.' },
