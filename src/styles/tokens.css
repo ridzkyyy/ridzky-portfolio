@@ -1,26 +1,39 @@
+/* Night operations: the page reads like a control room after dark. Teal is the live signal,
+   amber the one warm accent. The About band switches to paper for a change of pace. */
 :root {
-  --bg: #ffffff;
-  --surface: #f3f5f7;
-  --surface-2: #e7ebef;
-  --ink: #141a21;
-  --muted: #5a6573;
-  --accent: #0d7480;
-  --accent-strong: #0a5f69;
-  --accent-ink: #ffffff;
+  --bg: #0a0f14;
+  --surface: #111921;
+  --surface-2: #19242e;
+  --line: rgba(233, 239, 243, 0.09);
+  --ink: #e9eff3;
+  --muted: #93a3b1;
+  --accent: #3fd2c7;
+  --accent-strong: #79e6dd;
+  --accent-ink: #032321;
+  --accent-rgb: 63, 210, 199;
+  --warm: #ffb547;
 
   --face: 'Switzer', system-ui, sans-serif;
+  --display: 'Clash Grotesk', 'Switzer', system-ui, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --step-small: 0.9375rem;
   --step-body: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
   --step-lead: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
-  --step-title: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
-  --step-display: clamp(2.75rem, 1.2rem + 6vw, 6rem);
+  --step-title: clamp(2rem, 1.3rem + 2.4vw, 3.5rem);
+  --step-display: clamp(3.25rem, 1rem + 8.4vw, 8.5rem);
 
-  --wrap: 1180px;
+  --wrap: 1240px;
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
   --section-gap: clamp(5rem, 3.5rem + 6vw, 9rem);
-  --radius-media: 14px;
-  --radius-control: 8px;
+  --radius-media: 18px;
+  --radius-control: 10px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }

@@ -8,7 +8,7 @@ function Media({ item }: { item: CaseStudy }) {
   const { t } = useLang();
   const shots = item.shots ?? [];
   return (
-    <div className="case-media reveal">
+    <div className="case-media spot reveal">
       {shots.map((shot, i) => (
         <img key={shot.src} className={i > 0 ? 'case-shot-second' : undefined} src={shot.src} alt={shot.alt} loading="lazy" width={1200} height={750} />
       ))}
@@ -36,12 +36,15 @@ function Stages({ item }: { item: CaseStudy }) {
   );
 }
 
-function Case({ item }: { item: CaseStudy }) {
+function Case({ item, index, total }: { item: CaseStudy; index: number; total: number }) {
   const { t } = useLang();
   return (
     <article className="case" aria-labelledby={`case-${item.id}`}>
       <Media item={item} />
       <div className="case-copy reveal">
+        <p className="case-index">
+          {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+        </p>
         <p className="tag">{item.tag}</p>
         <h3 id={`case-${item.id}`}>{item.title}</h3>
         <p className="case-summary">{item.summary}</p>
@@ -78,8 +81,8 @@ export function Work() {
     <section className="section wrap" id="work" aria-labelledby="work-heading">
       <h2 id="work-heading" className="reveal">{t.work.title}</h2>
       <div className="cases">
-        {t.work.items.map((item) => (
-          <Case key={item.id} item={item} />
+        {t.work.items.map((item, i) => (
+          <Case key={item.id} item={item} index={i} total={t.work.items.length} />
         ))}
       </div>
     </section>
