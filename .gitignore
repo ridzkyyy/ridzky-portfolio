@@ -3,3 +3,6 @@ dist/
 .vercel
 *.log
 .DS_Store
+.playwright-mcp/
+.taste-skill/
+tsconfig.tsbuildinfo

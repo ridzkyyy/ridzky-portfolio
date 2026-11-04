@@ -1,47 +1,34 @@
+import { useLang } from '../i18n/lang';
+
 export function About() {
+  const { t } = useLang();
+  const a = t.about;
   return (
-    <section className="section" id="about" aria-labelledby="about-heading">
-      <div className="wrap">
-        <div className="section-head">
-          <span className="num">04 / SYS.PROFILE</span>
-          <h2 id="about-heading">
-            About <span className="hl">me</span>
-          </h2>
-        </div>
-        <div className="about-grid">
-          <p className="big">
-            I'm a technical project manager with an engineer's hands. I sit between
-            <mark> field operations and engineering</mark> — translating dispatcher pain into
-            architecture, and architecture into systems that survive contact with real trucks,
-            real drivers, and real deadlines.
-          </p>
-          <ul className="fact-list">
-            <li>
-              <span className="k">Role</span>
-              <span className="v">Technical Project Manager, Lacak.io (GPS tracking & fleet)</span>
-            </li>
-            <li>
-              <span className="k">Domains</span>
-              <span className="v">Fleet ops · IoT telemetry · real-time systems · logistics integrations</span>
-            </li>
-            <li>
-              <span className="k">Backend</span>
-              <span className="v">Python · Java/Spring · Node/TypeScript · PostgreSQL · Redis · MQTT</span>
-            </li>
-            <li>
-              <span className="k">Delivery</span>
-              <span className="v">Docker · Jenkins/GitHub Actions · Grafana · E2E testing</span>
-            </li>
-            <li>
-              <span className="k">Now exploring</span>
-              <span className="v">AI engineering — MCP tooling, CV inference, agent-ready systems</span>
-            </li>
-            <li>
-              <span className="k">Published</span>
-              <span className="v">Jurnal Algoritma — sales analytics platform (Moving Average method)</span>
-            </li>
-          </ul>
-        </div>
+    <section className="section about" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading" className="column">
+        {a.title}
+      </h2>
+      <div className="about-row">
+        <dl className="facts">
+          {a.facts.map((f) => (
+            <div key={f.k}>
+              <dt>{f.k}</dt>
+              <dd>{f.v}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="about-text">{a.text}</p>
+      </div>
+      <div className="about-row">
+        <p className="record-word">{a.toolboxWord}</p>
+        <dl className="record pairs">
+          {a.toolbox.map((x) => (
+            <div key={x.k}>
+              <dt>{x.k}</dt>
+              <dd>{x.v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

@@ -1,33 +1,52 @@
+import { CREDITS, EMAIL, LINKEDIN } from '../i18n/content';
+import { useLang } from '../i18n/lang';
+
 export function Footer() {
+  const { t } = useLang();
   return (
-    <footer className="footer" id="contact">
-      <div className="wrap">
-        <p className="cta-title">
-          Building something that moves <span className="hl">in the real world?</span>
-        </p>
-        <a className="mail" href="mailto:ridzkyguntur12@gmail.com" data-magnetic>
-          ridzkyguntur12@gmail.com
-        </a>
-        <div className="footer-meta">
-          <span>© 2026 Ridzky Guntur Nuriawan</span>
-          <div className="links">
-            <a href="https://github.com/ridzkyyy" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            <a
-              href="https://id.linkedin.com/in/ridzky-guntur-nuriawan-10346a1bb"
-              target="_blank"
-              rel="noreferrer"
-            >
+    <>
+      <section className="contact-band" id="contact" aria-labelledby="contact-heading">
+        <div className="contact">
+          <h2 id="contact-heading" className="contact-line">
+            {t.contact.title}
+          </h2>
+          <div className="contact-links">
+            <p>{t.contact.prompt}</p>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
-            <a href="https://instagram.com/ridzkygn" target="_blank" rel="noreferrer">
-              Instagram
-            </a>
+            <span className="soft">{t.contact.where}</span>
           </div>
-          <span>Jakarta · UTC+7 · Remote-ready</span>
         </div>
-      </div>
-    </footer>
+      </section>
+      <footer className="footer">
+        <span className="soft">{t.footer.what}</span>
+        <span className="footer-links">
+          <a href="https://github.com/ridzkyyy" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a href="https://instagram.com/ridzkygn" target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+        </span>
+        <span className="soft">{t.footer.credit}</span>
+        <p className="credits soft">
+          {t.footer.photos}{' '}
+          {CREDITS.map((c, i) => (
+            <span key={c.href}>
+              <a href={c.href} target="_blank" rel="noopener noreferrer">
+                {c.title}
+              </a>{' '}
+              by {c.by}
+              {i < CREDITS.length - 1 ? '; ' : '.'}
+            </span>
+          ))}
+        </p>
+      </footer>
+    </>
   );
 }
