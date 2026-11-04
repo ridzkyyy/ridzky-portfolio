@@ -6,7 +6,7 @@
   --anatomy-text: var(--ink);
   --anatomy-strong: var(--ink);
   --anatomy-muted: var(--muted);
-  --anatomy-face: #fbfcfd;
+  --anatomy-face: #fcfdfd;
   --anatomy-top: #ffffff;
   --anatomy-shade-0: #b4c1c7;
   --anatomy-shade-1: #c8d2d7;
@@ -28,14 +28,14 @@
 .iso .iso-plate {
   position: relative;
   padding: clamp(0.75rem, 2vw, 1.75rem);
-  border-radius: 0;
   background: var(--surface);
+  border-radius: var(--radius-media);
 }
 
 .iso-stage {
   cursor: grab;
   touch-action: pan-y;
-  border-radius: var(--radius);
+  border-radius: var(--radius-media);
 }
 
 .iso-stage[data-dragging] {

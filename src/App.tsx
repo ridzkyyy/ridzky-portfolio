@@ -1,7 +1,7 @@
 import { Hero } from './components/Hero';
+import { Work } from './components/Work';
+import { Projects } from './components/Projects';
 import { Impact } from './components/Impact';
-import { SystemsAtlas } from './components/SystemsAtlas';
-import { Products } from './components/Products';
 import { About } from './components/About';
 import { Footer } from './components/Footer';
 
@@ -10,9 +10,9 @@ export default function App() {
     <>
       <Hero />
       <main>
+        <Work />
+        <Projects />
         <Impact />
-        <SystemsAtlas />
-        <Products />
         <About />
       </main>
       <Footer />

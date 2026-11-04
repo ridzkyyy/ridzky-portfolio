@@ -1,29 +1,26 @@
-import { CREDITS, EMAIL, LINKEDIN } from '../i18n/content';
+import { EMAIL, GITHUB, LINKEDIN } from '../i18n/content';
 import { useLang } from '../i18n/lang';
 
 export function Footer() {
   const { t } = useLang();
   return (
-    <>
-      <section className="contact-band" id="contact" aria-labelledby="contact-heading">
-        <div className="contact">
-          <h2 id="contact-heading" className="contact-line">
-            {t.contact.title}
-          </h2>
-          <div className="contact-links">
-            <p>{t.contact.prompt}</p>
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-            <span className="soft">{t.contact.where}</span>
-          </div>
+    <footer className="end" id="contact">
+      <div className="wrap contact">
+        <h2>{t.contact.title}</h2>
+        <p>{t.contact.text}</p>
+        <div className="actions">
+          <a className="button button-light" href={`mailto:${EMAIL}`}>
+            {t.contact.email}
+          </a>
+          <a className="mail" href={`mailto:${EMAIL}`}>
+            {EMAIL}
+          </a>
         </div>
-      </section>
-      <footer className="footer">
-        <span className="soft">{t.footer.what}</span>
+      </div>
+      <div className="wrap footer-line">
+        <span>{t.footer.copy}</span>
         <span className="footer-links">
-          <a href="https://github.com/ridzkyyy" target="_blank" rel="noopener noreferrer">
+          <a href={GITHUB} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
           <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
@@ -33,20 +30,8 @@ export function Footer() {
             Instagram
           </a>
         </span>
-        <span className="soft">{t.footer.credit}</span>
-        <p className="credits soft">
-          {t.footer.photos}{' '}
-          {CREDITS.map((c, i) => (
-            <span key={c.href}>
-              <a href={c.href} target="_blank" rel="noopener noreferrer">
-                {c.title}
-              </a>{' '}
-              by {c.by}
-              {i < CREDITS.length - 1 ? '; ' : '.'}
-            </span>
-          ))}
-        </p>
-      </footer>
-    </>
+        <span>{t.footer.credit}</span>
+      </div>
+    </footer>
   );
 }
