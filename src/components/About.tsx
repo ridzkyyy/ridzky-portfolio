@@ -5,13 +5,13 @@ export function About() {
   const a = t.about;
   return (
     <section className="section wrap about" id="about" aria-labelledby="about-heading">
-      <div className="about-text">
+      <div className="about-text reveal">
         <h2 id="about-heading">{a.title}</h2>
         {a.text.map((p) => (
           <p key={p}>{p}</p>
         ))}
       </div>
-      <div className="about-side">
+      <div className="about-side reveal">
         <dl className="pairs">
           {a.facts.map((f) => (
             <div key={f.k}>
