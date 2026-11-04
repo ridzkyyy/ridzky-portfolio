@@ -65,12 +65,13 @@
 }
 
 .flow-step[data-on] {
-  background: var(--ink);
-  color: #c9d6dc;
+  background: rgba(var(--accent-rgb), 0.12);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.55);
+  color: var(--ink);
 }
 
 .flow-step[data-on] .flow-label {
-  color: var(--bg);
+  color: var(--accent);
 }
 
 .flow-step:focus-visible {
