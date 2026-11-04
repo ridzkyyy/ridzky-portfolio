@@ -5,7 +5,7 @@ import { ShaderField } from './ShaderField';
 export function Footer() {
   const { t } = useLang();
   return (
-    <footer className="end" id="contact">
+    <footer className="end night" id="contact">
       <ShaderField colors={['#0e5e66', '#24196a', '#3fd2c7']} background="#0a0f14" focus={[0.78, 0.2]} />
       <div className="wrap contact reveal">
         <h2>{t.contact.title}</h2>

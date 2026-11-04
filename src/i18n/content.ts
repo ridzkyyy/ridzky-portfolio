@@ -30,9 +30,15 @@ export interface Outcome {
   label: string;
 }
 
+export interface Metric {
+  value: string;
+  label: string;
+}
+
 export interface CaseStudy {
   id: string;
   outcome: Outcome;
+  scale: Metric;
   before?: string;
   after?: string;
   tag: string;
@@ -76,6 +82,7 @@ const en = {
     intro: 'I lead and build the software behind GPS tracking, telemetry pipelines and driver-safety AI, and I ship my own products on the side. Based in Jakarta, open to remote work.',
     primary: 'Email me',
     secondary: 'See my work',
+    greeting: ['Hi,', "I'm Ridzky."],
     statement: 'I replace rented fleet software with platforms the company owns.',
     outcomesTitle: 'What changed',
     estimate: 'Estimates from licence prices and fleet size.',
@@ -86,6 +93,13 @@ const en = {
     before: 'Before',
     after: 'After',
     did: 'What I did',
+    view: 'View case study',
+    back: 'All work',
+    problem: 'The problem',
+    result: 'What changed',
+    approach: 'How it works',
+    stack: 'Stack',
+    next: 'Next case',
     private: 'Private system. I can walk you through it on a call.',
     blurred: 'Blurred for privacy',
     stageHint: 'Parts of the system',
@@ -94,6 +108,7 @@ const en = {
     items: [
       {
         id: 'fleet',
+        scale: { value: '19,000', label: 'devices on the platform' },
         outcome: { value: '~$19k', unit: 'a month', label: 'in device licences no longer rented, across 19,000 devices' },
         before: 'Every tracker ran on a rented platform, at about $1 per device each month.',
         after: 'Our own gateway, event pipeline and platform core now carry the whole fleet.',
@@ -143,6 +158,7 @@ const en = {
       },
       {
         id: 'hub',
+        scale: { value: '~Rp216M', label: 'a year no longer billed' },
         outcome: { value: '~Rp18M', unit: 'a month', label: 'hosted hub subscription replaced, about Rp216M a year' },
         before: 'Device data passed through a hosted telematics hub billed at about Rp18 million a month.',
         after: 'One self-hosted hub: any tracker protocol in, one clean data shape out to every system.',
@@ -160,6 +176,7 @@ const en = {
       },
       {
         id: 'video',
+        scale: { value: '3 to 1', label: 'vendor platforms merged into one console' },
         outcome: { value: '~$5', unit: 'per licence', label: 'no longer bought from video vendors, on projects of around 1,000 units' },
         before: 'Dashcams were split across three vendor platforms, each with its own licence and a decoder we could not inspect.',
         after: 'One gateway and media server whose decoding we can audit, and one console for every brand.',
@@ -177,6 +194,7 @@ const en = {
       },
       {
         id: 'rekap',
+        scale: { value: '5', label: 'operations modules in one system' },
         outcome: { value: '84+', unit: 'pull requests', label: 'shipped alone to production, from the data model to the sales demo' },
         tag: 'Own product, in production',
         title: 'rekapmbg.id',
@@ -267,6 +285,7 @@ const id: Content = {
     intro: 'Saya memimpin dan membangun software untuk GPS tracking, pipeline telemetri dan AI keselamatan pengemudi. Di luar itu, saya juga membangun produk sendiri. Berbasis di Jakarta, terbuka untuk kerja remote.',
     primary: 'Email saya',
     secondary: 'Lihat karya saya',
+    greeting: ['Halo,', 'saya Ridzky.'],
     statement: 'Saya mengganti software armada sewaan dengan platform milik sendiri.',
     outcomesTitle: 'Hasil',
     estimate: 'Estimasi berdasarkan harga lisensi dan jumlah armada.',
@@ -277,6 +296,13 @@ const id: Content = {
     before: 'Sebelum',
     after: 'Sesudah',
     did: 'Peran saya',
+    view: 'Lihat studi kasus',
+    back: 'Semua karya',
+    problem: 'Masalahnya',
+    result: 'Yang berubah',
+    approach: 'Cara kerjanya',
+    stack: 'Stack',
+    next: 'Studi kasus berikutnya',
     private: 'Sistem internal. Detailnya bisa saya jelaskan lewat panggilan.',
     blurred: 'Diblur untuk privasi',
     stageHint: 'Bagian sistem',
@@ -285,6 +311,7 @@ const id: Content = {
     items: [
       {
         ...byId('fleet'),
+        scale: { value: '19.000', label: 'perangkat di platform' },
         outcome: { value: '~$19rb', unit: 'per bulan', label: 'biaya lisensi yang tidak lagi dibayar, untuk 19.000 perangkat' },
         before: 'Seluruh tracker berjalan di platform sewaan, sekitar $1 per perangkat per bulan.',
         after: 'Kini seluruh armada berjalan di gateway, pipeline event dan platform milik sendiri.',
@@ -332,6 +359,7 @@ const id: Content = {
       },
       {
         ...byId('hub'),
+        scale: { value: '~Rp216 jt', label: 'per tahun yang tidak lagi ditagih' },
         outcome: { value: '~Rp18 jt', unit: 'per bulan', label: 'biaya langganan hub yang dihentikan, sekitar Rp216 jt per tahun' },
         before: 'Data perangkat melewati hub telematika berlangganan, sekitar Rp18 juta per bulan.',
         after: 'Satu hub di server sendiri: tracker protokol apa pun masuk, keluar dalam satu format standar ke semua sistem.',
@@ -346,6 +374,7 @@ const id: Content = {
       },
       {
         ...byId('video'),
+        scale: { value: '3 jadi 1', label: 'platform vendor digabung dalam satu konsol' },
         outcome: { value: '~$5', unit: 'per lisensi', label: 'yang tidak lagi dibeli dari vendor video, pada proyek sekitar 1.000 unit' },
         before: 'Dashcam tersebar di tiga platform vendor, masing-masing dengan lisensi sendiri dan decoder yang tidak bisa diperiksa.',
         after: 'Satu gateway dan media server dengan proses decode yang bisa diaudit, serta satu konsol untuk semua merek.',
@@ -361,6 +390,7 @@ const id: Content = {
       },
       {
         ...byId('rekap'),
+        scale: { value: '5', label: 'modul operasional dalam satu sistem' },
         outcome: { value: '84+', unit: 'pull request', label: 'dirilis sendiri hingga produksi, dari model data sampai demo penjualan' },
         tag: 'Produk sendiri, sudah produksi',
         summary: 'ERP operasional untuk program Makan Bergizi Gratis (MBG).',

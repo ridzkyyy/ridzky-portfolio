@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { EMAIL } from '../i18n/content';
 import { useLang } from '../i18n/lang';
 import { JakartaClock } from './Clock';
+import { useHashRoute } from '../routing/useHashRoute';
 
 const SECTIONS = ['work', 'projects', 'about', 'contact'] as const;
 type Section = (typeof SECTIONS)[number];
@@ -28,7 +29,10 @@ function useActiveSection() {
 
 export function TopBar() {
   const { t, lang, toggle } = useLang();
-  const active = useActiveSection();
+  const { caseId } = useHashRoute();
+  const seen = useActiveSection();
+  // A case page belongs to Work, whatever section the observer last saw.
+  const active = caseId ? 'work' : seen;
   return (
     <div className="bar-shell">
       <div className="bar wrap">

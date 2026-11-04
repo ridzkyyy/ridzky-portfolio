@@ -1,17 +1,17 @@
-/* Night operations: the page reads like a control room after dark. Teal is the live signal,
-   amber the one warm accent. The About band switches to paper for a change of pace. */
+/* Warm paper and ink, teal as the one working colour. The contact close turns to night. */
 :root {
-  --bg: #0a0f14;
-  --surface: #111921;
-  --surface-2: #19242e;
-  --line: rgba(233, 239, 243, 0.09);
-  --ink: #e9eff3;
-  --muted: #93a3b1;
-  --accent: #3fd2c7;
-  --accent-strong: #79e6dd;
-  --accent-ink: #032321;
-  --accent-rgb: 63, 210, 199;
-  --warm: #ffb547;
+  --bg: #fbf8f3;
+  --surface: #f2ede4;
+  --surface-2: #e8e1d5;
+  --line: rgba(20, 26, 33, 0.1);
+  --ink: #141a21;
+  --muted: #5d6670;
+  --accent: #0d7480;
+  --accent-strong: #0a5f69;
+  --accent-ink: #ffffff;
+  --accent-rgb: 13, 116, 128;
+  --warm: #d9732a;
+  --card: #ffffff;
 
   --face: 'Switzer', system-ui, sans-serif;
   --display: 'Clash Grotesk', 'Switzer', system-ui, sans-serif;
@@ -36,4 +36,21 @@
   syntax: '<angle>';
   inherits: false;
   initial-value: 0deg;
+}
+
+/* The contact close: the night version of the same palette. */
+.night {
+  --bg: #0a0f14;
+  --surface: #111921;
+  --surface-2: #19242e;
+  --line: rgba(233, 239, 243, 0.09);
+  --ink: #e9eff3;
+  --muted: #93a3b1;
+  --accent: #3fd2c7;
+  --accent-strong: #79e6dd;
+  --accent-ink: #032321;
+  --accent-rgb: 63, 210, 199;
+  background: var(--bg);
+  color: var(--ink);
+  color-scheme: dark;
 }
