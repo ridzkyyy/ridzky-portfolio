@@ -194,174 +194,97 @@ p {
   color: var(--accent);
 }
 
-/* Top bar */
+/* Top bar: a plain masthead. Name on the left, words for links, a rule underneath. */
 .bar-shell {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(10, 15, 20, 0.72);
-  backdrop-filter: saturate(1.4) blur(12px);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
 
 .bar {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 1rem;
-  min-height: 4.5rem;
+  gap: 1.5rem;
+  min-height: 4rem;
+  font-size: var(--step-small);
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  text-decoration: none;
-}
-
-.mark {
-  width: 2.25rem;
-  height: 2.25rem;
-  flex: none;
-  transition: transform 500ms var(--ease-out);
-}
-
-.mark rect {
-  fill: var(--surface-2);
-  stroke: rgba(var(--accent-rgb), 0.35);
-}
-
-.mark path {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-dasharray: 40;
-  animation: draw-route 2.4s var(--ease-out) both;
-}
-
-.mark circle {
-  fill: var(--warm);
-}
-
-@keyframes draw-route {
-  from {
-    stroke-dashoffset: 40;
-  }
-}
-
-.brand:hover .mark {
-  transform: rotate(-8deg) scale(1.06);
-}
-
-.brand-text {
-  display: grid;
-  line-height: 1.15;
-}
-
-.brand-text b {
   font-family: var(--display);
   font-weight: 600;
   font-size: 1.0625rem;
-}
-
-.brand-text small {
-  color: var(--muted);
-  font-size: 0.75rem;
-}
-
-/* Availability, a real state, beside the time where I am. */
-.status {
-  justify-self: start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: 1.25rem;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 1px var(--line);
-  color: var(--muted);
-  font-size: 0.8125rem;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-@media (max-width: 1200px) {
-  .status {
-    display: none;
-  }
-}
-
-.status i {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.18);
-}
-
-.status time {
-  font-family: var(--mono);
-  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-decoration: none;
 }
 
 .bar nav {
   display: flex;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  border-radius: 999px;
-  background: rgba(17, 25, 33, 0.7);
-  box-shadow: inset 0 0 0 1px var(--line);
-  font-size: var(--step-small);
+  gap: clamp(1.25rem, 2.6vw, 2.25rem);
 }
 
-.bar nav a {
-  padding: 0.45rem 0.95rem;
-  border-radius: 999px;
+.bar nav a,
+.bar-mail {
   color: var(--muted);
   text-decoration: none;
-  transition: color 150ms, background-color 250ms;
+  text-underline-offset: 0.45em;
+  text-decoration-thickness: 1px;
+  transition: color 150ms;
 }
 
-.bar nav a:hover {
+.bar nav a:hover,
+.bar-mail:hover {
   color: var(--ink);
+  text-decoration-line: underline;
 }
 
 .bar nav a[aria-current] {
-  background: var(--surface-2);
   color: var(--ink);
-  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.35);
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent);
 }
 
-.bar-actions {
+.bar-end {
+  justify-self: end;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-left: 1rem;
+  gap: clamp(1rem, 2vw, 1.75rem);
 }
 
-.button-small {
-  min-height: 2.5rem;
-  padding: 0 1rem;
-  font-size: var(--step-small);
+.bar-time {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.bar-time time {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
 }
 
 .lang {
-  min-width: 2.75rem;
-  min-height: 2.5rem;
+  padding: 0.5rem 0;
   border: 0;
-  border-radius: 999px;
-  background: var(--surface-2);
-  color: var(--ink);
+  background: none;
+  color: var(--muted);
   font: inherit;
-  font-weight: 600;
   cursor: pointer;
-  transition: background-color 150ms, color 150ms;
 }
 
-.lang:hover {
-  background: var(--accent);
-  color: var(--accent-ink);
+.lang span[aria-current] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.lang:hover span {
+  color: var(--ink);
+}
+
+.bar-mail {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent);
 }
 
 /* Moving mesh gradient under the hero map and the contact close. */
@@ -1329,8 +1252,7 @@ p {
   }
 
   .bar nav,
-  .status,
-  .brand-text small {
+  .bar-time {
     display: none;
   }
 
