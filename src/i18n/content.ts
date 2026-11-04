@@ -83,7 +83,7 @@ const en = {
     primary: 'Email me',
     secondary: 'See my work',
     greeting: ['Hi,', "I'm Ridzky."],
-    statement: 'I replace rented fleet software with platforms the company owns.',
+    statement: ['The fleet platforms I build save ', 'about $240k', ' a year.'],
     outcomesTitle: 'What changed',
     estimate: 'Estimates from licence prices and fleet size.',
   },
@@ -257,6 +257,7 @@ const en = {
       { k: 'Location', v: 'Jakarta, Indonesia (UTC+7)' },
       { k: 'Published', v: 'Jurnal Algoritma, sales analytics with a moving average method' },
     ],
+    portraitAlt: 'Ridzky Guntur Nuriawan in a white shirt, smiling',
     toolboxTitle: 'Toolbox',
     toolbox: [
       { k: 'Backend', v: 'Python, Java and Spring Boot, Node.js and TypeScript' },
@@ -286,7 +287,7 @@ const id: Content = {
     primary: 'Email saya',
     secondary: 'Lihat karya saya',
     greeting: ['Halo,', 'saya Ridzky.'],
-    statement: 'Saya mengganti software armada sewaan dengan platform milik sendiri.',
+    statement: ['Platform armada yang saya bangun menghemat ', 'sekitar Rp4 miliar', ' per tahun.'],
     outcomesTitle: 'Hasil',
     estimate: 'Estimasi berdasarkan harga lisensi dan jumlah armada.',
   },
@@ -451,6 +452,7 @@ const id: Content = {
       { k: 'Lokasi', v: 'Jakarta, Indonesia (UTC+7)' },
       { k: 'Publikasi', v: 'Jurnal Algoritma, analitik penjualan dengan metode moving average' },
     ],
+    portraitAlt: 'Ridzky Guntur Nuriawan berkemeja putih, tersenyum',
     toolboxTitle: 'Tools',
     toolbox: [
       { k: 'Backend', v: 'Python, Java dan Spring Boot, Node.js dan TypeScript' },
