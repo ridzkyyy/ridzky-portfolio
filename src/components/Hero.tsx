@@ -3,18 +3,23 @@ import { useLang } from '../i18n/lang';
 import { BenchFigure } from './bench/BenchFigure';
 import { RouteField } from './RouteField';
 import { ShaderField } from './ShaderField';
-import { TopBar } from './TopBar';
+import { caseHref } from '../routing/useHashRoute';
 
 export function Hero() {
   const { t } = useLang();
   return (
     <>
-      <TopBar />
       <header className="top spot">
-        <ShaderField colors={['#0e5e66', '#24196a', '#d9822b']} background="#0a0f14" focus={[0.74, 0.5]} />
+        <ShaderField colors={['#bfe6e1', '#f7d4bc', '#d8d1f2']} background="#fbf8f3" focus={[0.7, 0.55]} />
         <RouteField />
         <div className="hero wrap" id="top">
-          <h1>{t.hero.name}</h1>
+          <h1 aria-label={`${t.hero.greeting.join(' ')} ${t.hero.name}`}>
+            {t.hero.greeting[0]}{' '}
+            <span className="monogram" aria-hidden="true">
+              RG
+            </span>{' '}
+            {t.hero.greeting[1]}
+          </h1>
           <div className="hero-text">
             <p className="hero-statement">{t.hero.statement}</p>
             <p className="hero-intro">
@@ -44,7 +49,7 @@ export function Hero() {
                 .filter((item) => item.before)
                 .map((item) => (
                   <li key={item.id}>
-                    <a href={`#case-${item.id}`}>
+                    <a href={caseHref(item.id)}>
                       <b>
                         {item.outcome.value} <small>{item.outcome.unit}</small>
                       </b>

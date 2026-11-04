@@ -1,93 +1,46 @@
-import { useState } from 'react';
 import type { CaseStudy } from '../i18n/content';
 import { useLang } from '../i18n/lang';
-import { Flow } from './flow/Flow';
-import './flow/flow.css';
+import { caseHref } from '../routing/useHashRoute';
 
-function Media({ item }: { item: CaseStudy }) {
+/** One case on the home page: outcome and scale up front, the full story one click away. */
+function CaseCard({ item, index }: { item: CaseStudy; index: number }) {
   const { t } = useLang();
-  const shots = item.shots ?? [];
+  const shot = item.shots?.[0];
   return (
-    <div className="case-media spot reveal">
-      {shots.map((shot, i) => (
-        <img key={shot.src} className={i > 0 ? 'case-shot-second' : undefined} src={shot.src} alt={shot.alt} loading="lazy" width={1200} height={750} />
-      ))}
-      {shots.some((s) => s.blurred) ? <span className="privacy">{t.work.blurred}</span> : null}
-    </div>
-  );
-}
-
-function Stages({ item }: { item: CaseStudy }) {
-  const { t } = useLang();
-  const [open, setOpen] = useState(0);
-  if (!item.stages) return null;
-  const stage = item.stages[open];
-  return (
-    <div className="stages reveal">
-      <div className="segmented" role="group" aria-label={t.work.stageHint}>
-        {item.stages.map((s, i) => (
-          <button key={s.name} type="button" aria-pressed={i === open} onClick={() => setOpen(i)}>
-            {s.name}
-          </button>
-        ))}
-      </div>
-      <Flow key={stage.name} title={stage.name} steps={stage.steps} />
-    </div>
-  );
-}
-
-function Case({ item, index, total }: { item: CaseStudy; index: number; total: number }) {
-  const { t } = useLang();
-  return (
-    <article className="case" aria-labelledby={`case-${item.id}`}>
-      <Media item={item} />
-      <div className="case-copy reveal">
-        <p className="case-index">
-          {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+    <article className="case-card spot reveal" aria-labelledby={`card-${item.id}`}>
+      <div className="case-card-copy">
+        <p className="tag">
+          {String(index + 1).padStart(2, '0')} · {item.tag}
         </p>
-        <p className="tag">{item.tag}</p>
-        <h3 id={`case-${item.id}`}>{item.title}</h3>
-        <p className="case-outcome">
-          <b>{item.outcome.value}</b> <small>{item.outcome.unit}</small>
-          <span>{item.outcome.label}</span>
-        </p>
-        <p className="case-summary">{item.summary}</p>
-        {item.before && item.after ? (
-          <ol className="shift">
-            <li className="shift-before">
-              <span>{t.work.before}</span>
-              {item.before}
-            </li>
-            <li className="shift-after">
-              <span>{t.work.after}</span>
-              {item.after}
-            </li>
-          </ol>
-        ) : null}
-        <p className="did">{t.work.did}</p>
-        <ul className="points">
-          {item.points.map((p) => (
-            <li key={p}>{p}</li>
-          ))}
-        </ul>
-        <ul className="chips" aria-label="Stack">
-          {item.stack.map((s) => (
+        <h3 id={`card-${item.id}`}>{item.title}</h3>
+        <p className="case-card-summary">{item.summary}</p>
+        <dl className="metrics">
+          <div>
+            <dt>
+              {item.outcome.value} <small>{item.outcome.unit}</small>
+            </dt>
+            <dd>{item.outcome.label}</dd>
+          </div>
+          <div>
+            <dt>{item.scale.value}</dt>
+            <dd>{item.scale.label}</dd>
+          </div>
+        </dl>
+        <ul className="chips" aria-label={t.work.stack}>
+          {item.stack.slice(0, 4).map((s) => (
             <li key={s}>{s}</li>
           ))}
         </ul>
-        {item.links.length > 0 ? (
-          <div className="actions">
-            {item.links.map((l, i) => (
-              <a key={l.href} className={i === 0 ? 'button' : 'text-link'} href={l.href} target="_blank" rel="noopener noreferrer">
-                {l.label}
-              </a>
-            ))}
-          </div>
-        ) : (
-          <p className="muted">{t.work.private}</p>
-        )}
+        <a className="button" href={caseHref(item.id)}>
+          {t.work.view} <span aria-hidden="true">→</span>
+        </a>
       </div>
-      <Stages item={item} />
+      {shot ? (
+        <a className="case-card-shot" href={caseHref(item.id)} tabIndex={-1} aria-hidden="true">
+          <img src={shot.src} alt="" loading="lazy" width={1100} height={640} />
+          {shot.blurred ? <span className="privacy">{t.work.blurred}</span> : null}
+        </a>
+      ) : null}
     </article>
   );
 }
@@ -100,9 +53,9 @@ export function Work() {
         <h2 id="work-heading">{t.work.title}</h2>
         <p>{t.work.lede}</p>
       </div>
-      <div className="cases">
+      <div className="case-cards">
         {t.work.items.map((item, i) => (
-          <Case key={item.id} item={item} index={i} total={t.work.items.length} />
+          <CaseCard key={item.id} item={item} index={i} />
         ))}
       </div>
     </section>
