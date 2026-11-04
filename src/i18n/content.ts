@@ -8,7 +8,13 @@ export interface Step {
   detail: string;
 }
 
+export interface Photo {
+  src: string;
+  alt: string;
+}
+
 export interface System {
+  photo?: Photo;
   title: string;
   chapter: string;
   desc: string;
@@ -44,6 +50,18 @@ const LINKS = {
   ],
 };
 
+const WORLD = {
+  truck: '/media/world/truk-pengangkut-barang.jpg',
+  toll: '/media/world/trans-java-toll-road-asian-highway-2.jpg',
+  mine: '/media/world/sunrise-dam-gold-mine-open-pit-04.jpg',
+};
+
+export const CREDITS = [
+  { title: 'Truk Pengangkut Barang', by: 'SATELITBM', href: 'https://commons.wikimedia.org/wiki/File:Truk_Pengangkut_Barang.jpg' },
+  { title: 'Trans-Java Toll Road, Jakarta', by: 'Firzafp', href: 'https://commons.wikimedia.org/wiki/File:Trans-Java_Toll_Road_(Asian_Highway_2;_Jakarta-Semarang_Toll_Road)_-_Jakarta_(01-06-2022).jpg' },
+  { title: 'Sunrise Dam Gold Mine open pit 04', by: 'Calistemon', href: 'https://commons.wikimedia.org/wiki/File:Sunrise_Dam_Gold_Mine_open_pit_04.jpg' },
+];
+
 const MEDIA = {
   rekap: { src: '/media/rekapmbg-hero.jpg' },
   mcpLab: { src: '/media/mcp-lab.gif' },
@@ -77,6 +95,7 @@ const en = {
     built: 'Built with',
     items: [
       {
+        photo: { src: WORLD.truck, alt: 'Two loaded cargo trucks parked by a road in Java' },
         chapter: 'First, it has to be believed.',
         title: 'GPS device gateway',
         desc: 'An async multiprocess TCP proxy that speaks a binary tracker protocol end to end. It decodes every frame, throws out teleports and impossible speeds with a nine-rule quality gate, buffers when the network drops, and queues commands back to the device.',
@@ -90,6 +109,7 @@ const en = {
         stack: STACKS.gateway,
       },
       {
+        photo: { src: WORLD.toll, alt: 'Traffic on the Trans-Java toll road in Jakarta under a storm sky' },
         chapter: 'Then, it has to mean something.',
         title: 'Fleet event pipeline',
         desc: 'A Kafka pipeline that turns the stream into typed alerts. Partition keys keep each vehicle in order, evaluators run in parallel, nothing is lost to a bad message, and a watchdog restarts the consumer rather than let it fall behind the road.',
@@ -117,6 +137,7 @@ const en = {
       },
     ] as System[],
     smallerTitle: 'And the systems around them',
+    smallerPhoto: { src: WORLD.mine, alt: 'A loaded haul truck climbing the ramp of an open-pit mine' },
     smaller: [
       { name: 'Driver fatigue validator', what: 'Dashcam alarms arrive, clips download with retry, faces go through PyTorch inference, and only confident fatigue reaches the ops ticket queue.' },
       { name: 'Trip and idle engine', what: 'A stateful batch engine that writes trips from raw positions, merges micro-stops and uses deterministic IDs so reruns are safe.' },
@@ -219,11 +240,11 @@ const en = {
     ],
   },
   contact: {
-    title: 'Building something that moves in the real world?',
+    title: 'Building something that moves?',
     prompt: 'Tell me what it is and where it breaks.',
     where: 'Jakarta, UTC+7. Open to remote work.',
   },
-  footer: { what: 'Ridzky Guntur Nuriawan, systems for fleets', credit: '© 2026. Bench drawn with the Anatomy kit.' },
+  footer: { what: 'Ridzky Guntur Nuriawan, systems for fleets', credit: '© 2026. Bench drawn with the Anatomy kit.', photos: 'Photos, CC BY-SA 4.0 via Wikimedia Commons:' },
 };
 
 export type Content = typeof en;
@@ -232,7 +253,7 @@ const id: Content = {
   nav: { systems: 'Sistem', products: 'Produk', about: 'Tentang', email: 'Kirim email', lang: 'English', langShort: 'EN' },
   hero: {
     title: ['Backend untuk', 'armada nyata.'],
-    text: 'Saya Ridzky, technical project manager yang juga ngoding, di Jakarta. Saya membangun sistem yang melacak truk, menjaga sopir tetap terjaga, dan mengantar laporan ke orang yang membayarnya.',
+    text: 'Saya Ridzky, technical project manager yang juga ngoding, di Jakarta. Saya membangun sistem yang memantau truk, menjaga sopir tetap terjaga, dan mengantar laporan ke orang yang membayarnya.',
     primary: 'Kirim email',
     secondary: 'Ikuti satu titik GPS',
     figureLabel: 'Meja uji telemetri. Geser atau pakai tombol panah untuk memutarnya.',
@@ -255,6 +276,7 @@ const id: Content = {
     built: 'Dibangun dengan',
     items: [
       {
+        photo: { src: WORLD.truck, alt: 'Dua truk barang bermuatan parkir di tepi jalan di Jawa' },
         chapter: 'Pertama, datanya harus bisa dipercaya.',
         title: 'Gateway perangkat GPS',
         desc: 'Proxy TCP async multiproses yang berbicara protokol biner tracker dari ujung ke ujung. Setiap frame didekode, lompatan posisi dan kecepatan mustahil dibuang lewat sembilan aturan quality gate, data ditampung saat jaringan putus, dan perintah dikirim balik ke perangkat.',
@@ -268,6 +290,7 @@ const id: Content = {
         stack: STACKS.gateway,
       },
       {
+        photo: { src: WORLD.toll, alt: 'Lalu lintas di jalan tol Trans-Jawa di Jakarta di bawah langit mendung' },
         chapter: 'Lalu, datanya harus berarti.',
         title: 'Pipeline event armada',
         desc: 'Pipeline Kafka yang mengubah aliran data jadi alert bertipe. Partition key menjaga urutan tiap kendaraan, evaluator berjalan paralel, tidak ada data hilang karena satu pesan rusak, dan watchdog me-restart consumer daripada membiarkannya tertinggal dari jalan.',
@@ -295,6 +318,7 @@ const id: Content = {
       },
     ] as System[],
     smallerTitle: 'Dan sistem-sistem di sekitarnya',
+    smallerPhoto: { src: WORLD.mine, alt: 'Haul truck bermuatan menanjak di ramp tambang terbuka' },
     smaller: [
       { name: 'Validator kelelahan sopir', what: 'Alarm dashcam masuk, klip diunduh dengan retry, wajah masuk inferensi PyTorch, dan hanya kelelahan yang meyakinkan yang sampai ke antrean tiket ops.' },
       { name: 'Mesin trip dan idle', what: 'Batch engine stateful yang menulis trip dari posisi mentah, menggabungkan berhenti singkat, dengan ID deterministik agar aman dijalankan ulang.' },
@@ -380,11 +404,11 @@ const id: Content = {
     ],
   },
   contact: {
-    title: 'Sedang membangun sesuatu yang bergerak di dunia nyata?',
+    title: 'Membangun sesuatu yang bergerak?',
     prompt: 'Ceritakan apa itu dan di mana ia sering rusak.',
     where: 'Jakarta, UTC+7. Terbuka untuk kerja remote.',
   },
-  footer: { what: 'Ridzky Guntur Nuriawan, sistem untuk armada', credit: '© 2026. Meja uji digambar dengan kit Anatomy.' },
+  footer: { what: 'Ridzky Guntur Nuriawan, sistem untuk armada', credit: '© 2026. Meja uji digambar dengan kit Anatomy.', photos: 'Foto, CC BY-SA 4.0 via Wikimedia Commons:' },
 };
 
 export const CONTENT: Record<Lang, Content> = { en, id };

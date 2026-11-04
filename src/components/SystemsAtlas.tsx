@@ -13,7 +13,12 @@ export function SystemsAtlas() {
       </div>
 
       {s.items.map((system) => (
-        <article className="system" key={system.stack.join() + system.steps.length + system.title}>
+        <article className="system" key={system.stack.join()}>
+          {system.photo ? (
+            <div className="world">
+              <img src={system.photo.src} alt={system.photo.alt} loading="lazy" width={1400} height={787} />
+            </div>
+          ) : null}
           <div className="column">
             <p className="chapter">{system.chapter}</p>
             <h3>{system.title}</h3>
@@ -26,6 +31,9 @@ export function SystemsAtlas() {
         </article>
       ))}
 
+      <div className="world world-mine">
+        <img src={s.smallerPhoto.src} alt={s.smallerPhoto.alt} loading="lazy" width={1400} height={1050} />
+      </div>
       <div className="column ledger-block">
         <h3>{s.smallerTitle}</h3>
         <dl className="ledger">

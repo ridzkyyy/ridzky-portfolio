@@ -14,14 +14,17 @@ export function Products() {
 
   const onTabKey = (event: KeyboardEvent) => {
     const step: Record<string, number> = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+    // Move from the focused tab, which hover-to-preview may have left behind.
+    const tabs = [...(tabsRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? [])];
+    const from = Math.max(0, tabs.indexOf(document.activeElement as HTMLButtonElement));
     let next: number | null = null;
-    if (event.key in step) next = (active + step[event.key] + items.length) % items.length;
+    if (event.key in step) next = (from + step[event.key] + items.length) % items.length;
     if (event.key === 'Home') next = 0;
     if (event.key === 'End') next = items.length - 1;
     if (next === null) return;
     event.preventDefault();
     setActive(next);
-    tabsRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+    tabs[next]?.focus();
   };
 
   return (

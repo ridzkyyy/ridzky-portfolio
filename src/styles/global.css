@@ -190,7 +190,7 @@ p {
 /* The one loud thing on the page: the claim, set as large as the width allows. */
 .hero h1 {
   grid-area: title;
-  font-size: clamp(3rem, 1rem + 10.4vw, 11.5rem);
+  font-size: clamp(3rem, 1rem + 9.6vw, 10.5rem);
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.055em;
@@ -209,10 +209,11 @@ p {
 
 .hero-text {
   grid-area: text;
+  align-self: start;
   margin: 0;
   display: grid;
   gap: 1.4rem;
-  padding-bottom: 2.5rem;
+  padding-top: 0.5rem;
   animation: rise 900ms var(--ease-out) 260ms both;
 }
 
@@ -401,6 +402,44 @@ p {
   text-align: right;
 }
 
+/* A real picture opens each chapter, running from the alignment to the edge. */
+.world {
+  margin-left: var(--align);
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.world img {
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+}
+
+.world-mine {
+  margin-top: clamp(5rem, 3rem + 5vw, 8rem);
+}
+
+.world-mine img {
+  object-position: 30% 70%;
+}
+
+@supports (animation-timeline: view()) {
+  .world img {
+    animation: drift linear both;
+    animation-timeline: view();
+  }
+
+  @keyframes drift {
+    from {
+      transform: translateY(-6%) scale(1.04);
+    }
+    to {
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
 /* The story line that opens each system. */
 .chapter {
   font-size: var(--step-lead);
@@ -449,7 +488,7 @@ p {
   font-size: clamp(2rem, 1rem + 3.6vw, 4rem);
   line-height: 1.02;
   letter-spacing: -0.045em;
-  max-width: 16ch;
+  max-width: 20ch;
 }
 
 .contact-links {
@@ -497,11 +536,21 @@ p {
   gap: 1.5rem;
 }
 
+.credits {
+  grid-column: 1 / -1;
+  max-width: none;
+  font-size: 0.8125rem;
+}
+
+.credits a {
+  color: inherit;
+}
+
 .footer .soft {
   color: #a9bac2;
 }
 
-.footer > :last-child {
+.footer > :nth-child(3) {
   text-align: right;
 }
 
@@ -557,7 +606,7 @@ p {
     gap: 0.5rem;
   }
 
-  .footer > :last-child {
+  .footer > :nth-child(3) {
     text-align: left;
   }
 }
@@ -569,7 +618,8 @@ p {
 
   .hero h1 span,
   .hero-text,
-  .hero .bench {
+  .hero .bench,
+  .world img {
     animation: none;
   }
 }

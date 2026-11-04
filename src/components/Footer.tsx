@@ -1,4 +1,4 @@
-import { EMAIL, LINKEDIN } from '../i18n/content';
+import { CREDITS, EMAIL, LINKEDIN } from '../i18n/content';
 import { useLang } from '../i18n/lang';
 
 export function Footer() {
@@ -34,6 +34,18 @@ export function Footer() {
           </a>
         </span>
         <span className="soft">{t.footer.credit}</span>
+        <p className="credits soft">
+          {t.footer.photos}{' '}
+          {CREDITS.map((c, i) => (
+            <span key={c.href}>
+              <a href={c.href} target="_blank" rel="noopener noreferrer">
+                {c.title}
+              </a>{' '}
+              by {c.by}
+              {i < CREDITS.length - 1 ? '; ' : '.'}
+            </span>
+          ))}
+        </p>
       </footer>
     </>
   );
