@@ -15,7 +15,9 @@ export function Hero() {
         <div className="hero wrap" id="top">
           <h1 aria-label={`${t.hero.greeting.join(' ')} ${t.hero.name}`}>
             {t.hero.greeting[0]}{' '}
-            <img className="avatar" src="/media/me-face.jpg" alt="" width={240} height={240} />{' '}
+            <span className="monogram" aria-hidden="true">
+              RG
+            </span>{' '}
             {t.hero.greeting[1]}
           </h1>
           <div className="hero-text">
