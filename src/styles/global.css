@@ -438,23 +438,27 @@ p {
   }
 }
 
-/* A small portrait set inside the greeting, like a word in the sentence. */
-.avatar {
-  display: inline-block;
-  width: 0.95em;
-  height: 0.95em;
-  margin: 0 0.06em;
-  vertical-align: -0.1em;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow:
-    0 0 0 0.05em var(--card),
-    0 0.12em 0.35em -0.1em rgba(20, 26, 33, 0.35);
-  transition: scale 500ms var(--ease-out);
+/* Initials in place of a portrait, set inside the greeting. */
+.monogram {
+  display: inline-grid;
+  place-items: center;
+  width: 2.15em;
+  height: 2.15em;
+  margin: 0 0.1em;
+  vertical-align: 0.05em;
+  border-radius: 0.6em;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.42em;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  rotate: -6deg;
+  box-shadow: 0 0.12em 0.3em -0.1em rgba(var(--accent-rgb), 0.6);
+  transition: rotate 500ms var(--ease-out);
 }
 
-.hero h1:hover .avatar {
-  scale: 1.06;
+.hero h1:hover .monogram {
+  rotate: 4deg;
 }
 
 .hero-statement {
@@ -1163,15 +1167,6 @@ p {
   gap: 1.5rem;
   align-content: start;
   padding-top: 0.5rem;
-}
-
-.portrait {
-  width: 100%;
-  max-width: 22rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 30px 60px -35px rgba(20, 26, 33, 0.45);
 }
 
 .about-side h3 {

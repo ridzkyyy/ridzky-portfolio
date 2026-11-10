@@ -257,7 +257,6 @@ const en = {
       { k: 'Location', v: 'Jakarta, Indonesia (UTC+7)' },
       { k: 'Published', v: 'Jurnal Algoritma, sales analytics with a moving average method' },
     ],
-    portraitAlt: 'Ridzky Guntur Nuriawan in a white shirt, smiling',
     toolboxTitle: 'Toolbox',
     toolbox: [
       { k: 'Backend', v: 'Python, Java and Spring Boot, Node.js and TypeScript' },
@@ -452,7 +451,6 @@ const id: Content = {
       { k: 'Lokasi', v: 'Jakarta, Indonesia (UTC+7)' },
       { k: 'Publikasi', v: 'Jurnal Algoritma, analitik penjualan dengan metode moving average' },
     ],
-    portraitAlt: 'Ridzky Guntur Nuriawan berkemeja putih, tersenyum',
     toolboxTitle: 'Tools',
     toolbox: [
       { k: 'Backend', v: 'Python, Java dan Spring Boot, Node.js dan TypeScript' },
